@@ -1,0 +1,1271 @@
+{
+  "https://fenixservices.fao.org/faostat/api/v1/en/data/Prices|Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36|maize": [
+    {
+      "attempt": 1,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 2,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 3,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 4,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 5,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 6,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "ok": false
+    }
+  ],
+  "https://fenixservices.fao.org/faostat/api/v1/en/data/Prices|Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36|rice": [
+    {
+      "attempt": 1,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 2,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 3,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 4,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 5,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 6,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "ok": false
+    }
+  ],
+  "https://fenixservices.fao.org/faostat/api/v1/en/data/Prices|Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36|cassava": [
+    {
+      "attempt": 1,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 2,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 3,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 4,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 5,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 6,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "ok": false
+    }
+  ],
+  "https://fenixservices.fao.org/faostat/api/v1/en/data/Prices|curl/7.85.0|maize": [
+    {
+      "attempt": 1,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 2,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 3,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 4,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 5,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 6,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "ok": false
+    }
+  ],
+  "https://fenixservices.fao.org/faostat/api/v1/en/data/Prices|curl/7.85.0|rice": [
+    {
+      "attempt": 1,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 2,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 3,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 4,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 5,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 6,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "ok": false
+    }
+  ],
+  "https://fenixservices.fao.org/faostat/api/v1/en/data/Prices|curl/7.85.0|cassava": [
+    {
+      "attempt": 1,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 2,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 3,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 4,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 5,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 6,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "ok": false
+    }
+  ],
+  "https://fenixservices.fao.org/faostat/api/v1/en/data/Prices|python-requests/2.31.0|maize": [
+    {
+      "attempt": 1,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 2,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 3,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 4,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 5,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 6,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "ok": false
+    }
+  ],
+  "https://fenixservices.fao.org/faostat/api/v1/en/data/Prices|python-requests/2.31.0|rice": [
+    {
+      "attempt": 1,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 2,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 3,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 4,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 5,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 6,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "ok": false
+    }
+  ],
+  "https://fenixservices.fao.org/faostat/api/v1/en/data/Prices|python-requests/2.31.0|cassava": [
+    {
+      "attempt": 1,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 2,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 3,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 4,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 5,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "attempt": 6,
+      "status": 521
+    },
+    {
+      "text_snippet": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-521/\",\"title\":\"Error 521: Web server is down\",\"status\":521,\"detail\":\"Cloudflare attempt"
+    },
+    {
+      "ok": false
+    }
+  ],
+  "https://www.fao.org/faostat/api/v1/en/data/Prices|Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36|maize": [
+    {
+      "attempt": 1,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 2,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 3,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 4,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 5,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 6,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "ok": false
+    }
+  ],
+  "https://www.fao.org/faostat/api/v1/en/data/Prices|Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36|rice": [
+    {
+      "attempt": 1,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 2,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 3,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 4,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 5,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 6,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "ok": false
+    }
+  ],
+  "https://www.fao.org/faostat/api/v1/en/data/Prices|Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36|cassava": [
+    {
+      "attempt": 1,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 2,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 3,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 4,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 5,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 6,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "ok": false
+    }
+  ],
+  "https://www.fao.org/faostat/api/v1/en/data/Prices|curl/7.85.0|maize": [
+    {
+      "attempt": 1,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 2,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 3,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 4,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 5,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 6,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "ok": false
+    }
+  ],
+  "https://www.fao.org/faostat/api/v1/en/data/Prices|curl/7.85.0|rice": [
+    {
+      "attempt": 1,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 2,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 3,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 4,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 5,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 6,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "ok": false
+    }
+  ],
+  "https://www.fao.org/faostat/api/v1/en/data/Prices|curl/7.85.0|cassava": [
+    {
+      "attempt": 1,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 2,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 3,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 4,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 5,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 6,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "ok": false
+    }
+  ],
+  "https://www.fao.org/faostat/api/v1/en/data/Prices|python-requests/2.31.0|maize": [
+    {
+      "attempt": 1,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 2,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 3,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 4,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 5,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 6,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "ok": false
+    }
+  ],
+  "https://www.fao.org/faostat/api/v1/en/data/Prices|python-requests/2.31.0|rice": [
+    {
+      "attempt": 1,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 2,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 3,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 4,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 5,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 6,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "ok": false
+    }
+  ],
+  "https://www.fao.org/faostat/api/v1/en/data/Prices|python-requests/2.31.0|cassava": [
+    {
+      "attempt": 1,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 2,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 3,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 4,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 5,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "attempt": 6,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!DOCTYPE html>\n<html>\n<head>\n    <title>FAOSTAT</title>\n    <link rel='author' href='humans.txt'>\n    <meta charset='utf-8'>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    },
+    {
+      "ok": false
+    }
+  ],
+  "https://data.apps.fao.org/faostat/api/v1/en/data/Prices|Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36|maize": [
+    {
+      "attempt": 1,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 2,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 3,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 4,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 5,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 6,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "ok": false
+    }
+  ],
+  "https://data.apps.fao.org/faostat/api/v1/en/data/Prices|Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36|rice": [
+    {
+      "attempt": 1,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 2,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 3,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 4,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 5,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 6,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "ok": false
+    }
+  ],
+  "https://data.apps.fao.org/faostat/api/v1/en/data/Prices|Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36|cassava": [
+    {
+      "attempt": 1,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 2,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 3,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 4,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 5,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 6,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "ok": false
+    }
+  ],
+  "https://data.apps.fao.org/faostat/api/v1/en/data/Prices|curl/7.85.0|maize": [
+    {
+      "attempt": 1,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 2,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 3,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 4,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 5,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 6,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "ok": false
+    }
+  ],
+  "https://data.apps.fao.org/faostat/api/v1/en/data/Prices|curl/7.85.0|rice": [
+    {
+      "attempt": 1,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 2,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 3,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 4,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 5,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 6,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "ok": false
+    }
+  ],
+  "https://data.apps.fao.org/faostat/api/v1/en/data/Prices|curl/7.85.0|cassava": [
+    {
+      "attempt": 1,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 2,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 3,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 4,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 5,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 6,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "ok": false
+    }
+  ],
+  "https://data.apps.fao.org/faostat/api/v1/en/data/Prices|python-requests/2.31.0|maize": [
+    {
+      "attempt": 1,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 2,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 3,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 4,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 5,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 6,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "ok": false
+    }
+  ],
+  "https://data.apps.fao.org/faostat/api/v1/en/data/Prices|python-requests/2.31.0|rice": [
+    {
+      "attempt": 1,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 2,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 3,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 4,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 5,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 6,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "ok": false
+    }
+  ],
+  "https://data.apps.fao.org/faostat/api/v1/en/data/Prices|python-requests/2.31.0|cassava": [
+    {
+      "attempt": 1,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 2,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 3,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 4,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 5,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "attempt": 6,
+      "status": 404
+    },
+    {
+      "text_snippet": "<!doctype html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <title>404 - Not Found</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link href=\"./publ"
+    },
+    {
+      "ok": false
+    }
+  ]
+}

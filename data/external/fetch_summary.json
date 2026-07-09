@@ -1,0 +1,132 @@
+{
+  "FAOSTAT_Prices_maize": {
+    "status": 521,
+    "url": "https://fenixservices.fao.org/faostat/api/v1/en/data/Prices?country=Togo&item=maize&format=json",
+    "json_keys": null
+  },
+  "FAOSTAT_Prices_rice": {
+    "status": 521,
+    "url": "https://fenixservices.fao.org/faostat/api/v1/en/data/Prices?country=Togo&item=rice&format=json",
+    "json_keys": null
+  },
+  "FAOSTAT_Prices_cassava": {
+    "status": 521,
+    "url": "https://fenixservices.fao.org/faostat/api/v1/en/data/Prices?country=Togo&item=cassava&format=json",
+    "json_keys": null
+  },
+  "FAOSTAT_Production_maize": {
+    "status": 521,
+    "url": "https://fenixservices.fao.org/faostat/api/v1/en/data/Production?country=Togo&item=maize&format=json",
+    "json_keys": null
+  },
+  "FAOSTAT_Production_rice": {
+    "status": 521,
+    "url": "https://fenixservices.fao.org/faostat/api/v1/en/data/Production?country=Togo&item=rice&format=json",
+    "json_keys": null
+  },
+  "FAOSTAT_Production_cassava": {
+    "status": 521,
+    "url": "https://fenixservices.fao.org/faostat/api/v1/en/data/Production?country=Togo&item=cassava&format=json",
+    "json_keys": null
+  },
+  "FAOSTAT_Production_Crops_maize": {
+    "status": 521,
+    "url": "https://fenixservices.fao.org/faostat/api/v1/en/data/Production_Crops?country=Togo&item=maize&format=json",
+    "json_keys": null
+  },
+  "FAOSTAT_Production_Crops_rice": {
+    "status": 521,
+    "url": "https://fenixservices.fao.org/faostat/api/v1/en/data/Production_Crops?country=Togo&item=rice&format=json",
+    "json_keys": null
+  },
+  "FAOSTAT_Production_Crops_cassava": {
+    "status": 521,
+    "url": "https://fenixservices.fao.org/faostat/api/v1/en/data/Production_Crops?country=Togo&item=cassava&format=json",
+    "json_keys": null
+  },
+  "WB_CPI": {
+    "status": 200,
+    "sample": [
+      {
+        "indicator": {
+          "id": "FP.CPI.TOTL",
+          "value": "Consumer price index (2010 = 100)"
+        },
+        "country": {
+          "id": "TG",
+          "value": "Togo"
+        },
+        "countryiso3code": "TGO",
+        "date": "2025",
+        "value": null,
+        "unit": "",
+        "obs_status": "",
+        "decimal": 1
+      },
+      {
+        "indicator": {
+          "id": "FP.CPI.TOTL",
+          "value": "Consumer price index (2010 = 100)"
+        },
+        "country": {
+          "id": "TG",
+          "value": "Togo"
+        },
+        "countryiso3code": "TGO",
+        "date": "2024",
+        "value": 140.63893740649,
+        "unit": "",
+        "obs_status": "",
+        "decimal": 1
+      },
+      {
+        "indicator": {
+          "id": "FP.CPI.TOTL",
+          "value": "Consumer price index (2010 = 100)"
+        },
+        "country": {
+          "id": "TG",
+          "value": "Togo"
+        },
+        "countryiso3code": "TGO",
+        "date": "2023",
+        "value": 136.725018664212,
+        "unit": "",
+        "obs_status": "",
+        "decimal": 1
+      },
+      {
+        "indicator": {
+          "id": "FP.CPI.TOTL",
+          "value": "Consumer price index (2010 = 100)"
+        },
+        "country": {
+          "id": "TG",
+          "value": "Togo"
+        },
+        "countryiso3code": "TGO",
+        "date": "2022",
+        "value": 129.610336993973,
+        "unit": "",
+        "obs_status": "",
+        "decimal": 1
+      },
+      {
+        "indicator": {
+          "id": "FP.CPI.TOTL",
+          "value": "Consumer price index (2010 = 100)"
+        },
+        "country": {
+          "id": "TG",
+          "value": "Togo"
+        },
+        "countryiso3code": "TGO",
+        "date": "2021",
+        "value": 120.045614301505,
+        "unit": "",
+        "obs_status": "",
+        "decimal": 1
+      }
+    ]
+  }
+}

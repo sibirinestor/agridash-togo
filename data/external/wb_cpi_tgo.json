@@ -1,0 +1,1068 @@
+[
+  {
+    "page": 1,
+    "pages": 1,
+    "per_page": 500,
+    "total": 66,
+    "sourceid": "2",
+    "lastupdated": "2026-04-08"
+  },
+  [
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "2025",
+      "value": null,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "2024",
+      "value": 140.63893740649,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "2023",
+      "value": 136.725018664212,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "2022",
+      "value": 129.610336993973,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "2021",
+      "value": 120.045614301505,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "2020",
+      "value": 115.222166604613,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "2019",
+      "value": 113.296929295441,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "2018",
+      "value": 112.537690648103,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "2017",
+      "value": 111.503213533868,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "2016",
+      "value": 112.608909002895,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "2015",
+      "value": 111.179750599295,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "2014",
+      "value": 108.378170652492,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "2013",
+      "value": 108.171697841756,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "2012",
+      "value": 106.232534720517,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "2011",
+      "value": 103.56351472904,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "2010",
+      "value": 100,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "2009",
+      "value": 98.5746643970598,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "2008",
+      "value": 95.0450652277537,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "2007",
+      "value": 87.4421229151333,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "2006",
+      "value": 86.6229528033106,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "2005",
+      "value": 84.7342452917256,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "2004",
+      "value": 79.351864703999,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "2003",
+      "value": 79.0411707126895,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "2002",
+      "value": 79.7831547572729,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "2001",
+      "value": 77.4144141336075,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "2000",
+      "value": 74.4945328767797,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "1999",
+      "value": 73.1323650898538,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "1998",
+      "value": 73.1713021921239,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "1997",
+      "value": 72.4645278394312,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "1996",
+      "value": 66.9413168760601,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "1995",
+      "value": 63.9439444786246,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "1994",
+      "value": 54.918852892507,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "1993",
+      "value": 39.4637545132106,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "1992",
+      "value": 39.8651494026592,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "1991",
+      "value": 39.3171521894877,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "1990",
+      "value": 39.1655494764284,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "1989",
+      "value": 38.7718824614085,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "1988",
+      "value": 39.1000898342081,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "1987",
+      "value": 39.159185344546,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "1986",
+      "value": 39.138047335079,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "1985",
+      "value": 37.5876993504071,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "1984",
+      "value": 38.2822988873016,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "1983",
+      "value": 39.6817260301873,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "1982",
+      "value": 36.2869162517009,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "1981",
+      "value": 32.6527696563456,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "1980",
+      "value": 27.2750782155987,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "1979",
+      "value": 24.2862091350484,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "1978",
+      "value": 22.5835765660444,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "1977",
+      "value": 22.4840233601675,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "1976",
+      "value": 18.3607477715543,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "1975",
+      "value": 16.4462805270314,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "1974",
+      "value": 13.9360850802178,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "1973",
+      "value": 12.3511889510409,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "1972",
+      "value": 11.9202349142361,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "1971",
+      "value": 11.0652652776743,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "1970",
+      "value": 10.3906950054258,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "1969",
+      "value": 9.94509315703294,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "1968",
+      "value": 9.38076694068038,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "1967",
+      "value": 9.35301319224266,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "1966",
+      "value": 9.57504317909683,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "1965",
+      "value": null,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "1964",
+      "value": null,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "1963",
+      "value": null,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "1962",
+      "value": null,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "1961",
+      "value": null,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    },
+    {
+      "indicator": {
+        "id": "FP.CPI.TOTL",
+        "value": "Consumer price index (2010 = 100)"
+      },
+      "country": {
+        "id": "TG",
+        "value": "Togo"
+      },
+      "countryiso3code": "TGO",
+      "date": "1960",
+      "value": null,
+      "unit": "",
+      "obs_status": "",
+      "decimal": 1
+    }
+  ]
+]

@@ -1,0 +1,185 @@
+/* Custom styles for AgriDash Togo
+   - Define theme variables for light/dark
+   - Improve navbar, card, KPI and graph visuals
+   - Make layout more spacious and responsive
+*/
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+:root{
+  --primary: #1a5276;
+  --secondary: #2e86c1;
+  --success: #27ae60;
+  --warning: #f39c12;
+  --danger: #e74c3c;
+  --muted: #6c757d;
+  --bg: #ffffff;
+  --card-bg: #ffffff;
+  --text: #2c3e50;
+  --glass: rgba(255,255,255,0.6);
+}
+
+[data-theme="dark"]{
+  --bg: #1a1d23;
+  --card-bg: #222428;
+  --text: #e0e0e0;
+  --glass: rgba(255,255,255,0.03);
+}
+
+html,body,#app-container{height:100%;}
+body{
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background-color: var(--bg) !important;
+  color: var(--text) !important;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* Navbar */
+.navbar{
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.navbar .navbar-brand, .navbar .nav-link{color: #fff !important}
+
+/* Main container spacing */
+#main-container{padding-top:1rem; padding-bottom:2rem}
+
+/* Cards */
+.card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent), var(--card-bg) !important;
+  border-radius: 0.65rem;
+  border: 1px solid rgba(0,0,0,0.04) !important;
+}
+.card .card-header{background: transparent; border-bottom: none}
+
+/* Headings and typography */
+h1, h2, h3, h4, h5, h6 {font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto; margin:0}
+h1{font-size:1.6rem; font-weight:800}
+h2{font-size:1.25rem; font-weight:700}
+h3{font-size:1.05rem; font-weight:600}
+.card-header h6{font-size:0.95rem; font-weight:700}
+
+/* KPI cards */
+.border-start{border-left-width:0.45rem !important;}
+
+.kpi-compact .card-body{padding:0.9rem}
+.kpi-compact h3{font-size:1.45rem}
+.kpi-compact .small{color:var(--muted)}
+
+/* Make KPI cards more rounded and ensure the thick left border respects the radius */
+.card.kpi-compact{
+  border-radius: 0.9rem !important;
+  overflow: hidden;
+}
+.card.kpi-compact{border-top-left-radius:0.9rem !important; border-bottom-left-radius:0.9rem !important}
+
+/* Navbar refinements */
+.navbar {
+  padding: 0.45rem 1rem;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+}
+.navbar .navbar-brand { font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto; font-weight:700; color: #fff; }
+.navbar .nav-link { color: rgba(255,255,255,0.92); margin-right: 0.35rem; font-weight:600; }
+.navbar .nav-link:hover { color: #fff; opacity: 0.95; }
+.navbar .btn { padding: 0.35rem 0.6rem; font-size: 0.85rem; }
+.navbar .fa-*:before { vertical-align: baseline; }
+
+@media (max-width: 767px) {
+  .navbar .nav-link span { display: none; }
+  .navbar .navbar-brand { font-size: 1rem; }
+}
+
+/* Icon, spacing and color refinements */
+.navbar .fa { font-size: 0.98rem; margin-right: 0.4rem; }
+.navbar .fa-lg { font-size: 1.05rem; }
+.kpi-compact .fa { font-size: 1.15rem; color: var(--bs-primary); margin-right: 0.45rem; }
+.kpi-compact .value { font-weight:700; letter-spacing: -0.2px }
+.kpi-compact .small { font-size: 0.82rem }
+
+/* Subtle primary tint for CTA-like controls */
+.navbar .btn-primary { background-color: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.12); color: #fff }
+.navbar .btn-primary:hover { background-color: rgba(255,255,255,0.16) }
+
+/* Slightly more breathing room for top-level content */
+.app-container { padding-top: 0.85rem }
+
+/* Graph container */
+.dcc-graph, .js-plotly-plot{background: transparent !important}
+.card .card-body .plotly-graph-div{background: transparent !important}
+
+/* Buttons */
+.btn[outline]{border-radius:0.45rem}
+
+/* Year preset buttons style (better affordance than badges) */
+.btn-group .btn{
+  border-radius: 0.45rem; padding: 0.35rem 0.6rem; font-size:0.85rem; min-width:64px;
+}
+.btn-group .btn:focus{box-shadow: 0 0 0 0.12rem rgba(46,134,193,0.16)}
+.btn-group .btn.active, .btn-group .btn:active{transform: translateY(1px)}
+
+/* Make preset controls and slider visually grouped */
+.btn-group{margin-bottom:0.5rem}
+.rc-slider{margin-top:0.25rem}
+
+/* Dropdowns and selects: increase touch target */
+.Select, .Select-control, .DashDropdown, .dropdown{min-height:38px}
+
+/* Improve slider marks legibility */
+.rc-slider-mark-text{font-size:0.78rem; color:var(--muted)}
+
+/* Slightly larger input labels and spacing */
+label.fw-semibold{font-size:0.92rem}
+
+/* Give filters card a subtle shadow and consistent padding */
+#filtres-card{box-shadow:0 4px 14px rgba(20,20,20,0.03)}
+
+/* Filtres card tweaks */
+#filtres-card{padding:0.25rem}
+#filtres-card .card-body{padding:0.75rem}
+
+/* Responsive tweaks */
+@media (max-width: 768px){
+  .navbar .d-none.d-md-inline{display:none !important}
+  #filtres-card .row > [class*="col-"]{margin-bottom:0.5rem}
+  .card{border-radius:0.5rem}
+}
+
+/* PDF button focus */
+#btn-pdf{transition:transform .12s ease}
+#btn-pdf:active{transform:translateY(1px)}
+
+/* Improve table styling */
+.datatable td, .datatable th{vertical-align:middle}
+
+/* Navbar premium styling */
+.navbar .nav-custom-link {
+  padding: 0.4rem 0.85rem !important;
+  border-radius: 8px !important;
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+  color: rgba(255,255,255,0.7) !important;
+  transition: all 0.2s ease !important;
+  position: relative !important;
+}
+.navbar .nav-custom-link:hover {
+  color: #fff !important;
+  background: rgba(255,255,255,0.1) !important;
+}
+.navbar .nav-custom-link.active {
+  color: #fff !important;
+  background: rgba(255,255,255,0.12) !important;
+  box-shadow: inset 0 -2px 0 #2ecc71 !important;
+  font-weight: 600 !important;
+}
+.navbar .nav-custom-link.active::after {
+  content: ''; position: absolute; bottom: 0; left: 25%;
+  width: 50%; height: 2px; background: #2ecc71; border-radius: 1px;
+}
+.navbar .nav-custom-item { margin: 0 1px !important; }
+@media (max-width: 991px) {
+  .navbar .nav-custom-link { padding: 0.6rem 1rem !important; }
+}
+.navbar-toggler:focus { box-shadow: none !important; }
+.form-check-input:checked { background-color: #2ecc71 !important; border-color: #2ecc71 !important; }
+
+/* Smooth transitions for theme */
+*{transition:background-color .2s ease, color .2s ease, border-color .2s ease}
