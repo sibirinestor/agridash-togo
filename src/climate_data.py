@@ -1,7 +1,10 @@
 import requests
 import pandas as pd
 import numpy as np
+import logging
 from pathlib import Path
+
+logger = logging.getLogger(__name__)
 
 DATA_DIR = Path(__file__).parent.parent / "data"
 CACHE_FILE = DATA_DIR / "togo_climate_nasa_power.csv"
@@ -75,7 +78,7 @@ def _cache_climate_data():
                     "temp_c": round(annual_temp, 2),
                 })
         except Exception as e:
-            print(f"  Warning: NASA POWER failed for {region}: {e}")
+            logger.warning(f"  Warning: NASA POWER failed for {region}: {e}")
 
     df = pd.DataFrame(records)
     national = df.groupby("Year").agg(

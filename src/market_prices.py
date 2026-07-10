@@ -1,7 +1,10 @@
 import pandas as pd
 import numpy as np
+import logging
 from pathlib import Path
 import hashlib
+
+logger = logging.getLogger(__name__)
 
 DATA_DIR = Path(__file__).parent.parent / "data"
 MARKET_CACHE = DATA_DIR / "togo_market_prices.csv"
@@ -125,7 +128,8 @@ def get_arbitrage_opportunities(df: pd.DataFrame, year: int, threshold_pct: floa
 
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
     df = get_market_prices()
-    print(f"Generated {len(df)} rows")
-    print(f"Years: {df['Year'].min()}-{df['Year'].max()}")
+    logger.info(f"Generated {len(df)} rows")
+    logger.info(f"Years: {df['Year'].min()}-{df['Year'].max()}")
     print(df.sample(10).to_string())

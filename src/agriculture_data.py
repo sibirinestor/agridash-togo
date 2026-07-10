@@ -1,7 +1,10 @@
 import pandas as pd
 import numpy as np
+import logging
 from pathlib import Path
 from src.config import ALL_CROPS
+
+logger = logging.getLogger(__name__)
 
 DATA_DIR = Path(__file__).parent.parent / "data"
 WB_CACHE = DATA_DIR / "togo_wb_agriculture.csv"
@@ -126,11 +129,12 @@ PIA_TRANSFORMATION_POTENTIAL = {
 
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
     df = get_togo_agriculture_data()
-    print(f"Generated {len(df)} rows")
+    logger.info(f"Generated {len(df)} rows")
     for year in [2000, 2010, 2020, 2025]:
         sub = df[df["Year"] == year]
-        print(f"\n{year}: {sub['production_t'].sum()/1e6:.3f}M t total")
-        print(f"  Maize: {sub[sub.crop=='maïs']['production_t'].sum()/1e3:.0f}t")
-        print(f"  Rice: {sub[sub.crop=='riz_paddy']['production_t'].sum()/1e3:.0f}t")
-        print(f"  Cereal yield: {sub[sub['category']=='céréale']['yield_t_ha'].mean():.3f} t/ha")
+        logger.info(f"{year}: {sub['production_t'].sum()/1e6:.3f}M t total")
+        logger.info(f"  Maize: {sub[sub.crop=='maïs']['production_t'].sum()/1e3:.0f}t")
+        logger.info(f"  Rice: {sub[sub.crop=='riz_paddy']['production_t'].sum()/1e3:.0f}t")
+        logger.info(f"  Cereal yield: {sub[sub['category']=='céréale']['yield_t_ha'].mean():.3f} t/ha")

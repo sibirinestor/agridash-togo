@@ -1769,13 +1769,22 @@ from flask import request as _flask_request, Response as _FlaskResponse
 
 @server.before_request
 def _check_auth():
+    if _flask_request.path.startswith("/_alive") or _flask_request.path == "/favicon.ico":
+        return
     auth = _flask_request.authorization
     if auth and auth.username == _AUTH_USER and auth.password == _AUTH_PASS:
         return
-    if _flask_request.path.startswith("/_alive") or _flask_request.path == "/favicon.ico":
-        return
     return _FlaskResponse("Authentication Required", 401,
                           {"WWW-Authenticate": 'Basic realm="AgriDash Togo"'})
+
+
+@server.route("/_alive")
+def _health():
+    import json as _json
+    return _FlaskResponse(
+        _json.dumps({"status": "ok", "app": "agridash-togo"}),
+        mimetype="application/json",
+    )
 
 
 if __name__ == "__main__":

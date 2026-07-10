@@ -1,12 +1,23 @@
 import numpy as np
 import pandas as pd
+import logging
 from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
 from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import train_test_split, cross_val_score, TimeSeriesSplit
+from sklearn.model_selection import cross_val_score, TimeSeriesSplit
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.preprocessing import StandardScaler
 import joblib
 from pathlib import Path
+
+logger = logging.getLogger(__name__)
+
+
+def detect_outliers_iqr(series: pd.Series, factor: float = 1.5) -> pd.Series:
+    q1, q3 = series.quantile(0.25), series.quantile(0.75)
+    iqr = q3 - q1
+    lower = q1 - factor * iqr
+    upper = q3 + factor * iqr
+    return (series < lower) | (series > upper)
 
 
 class YieldPredictor:
@@ -42,6 +53,11 @@ class YieldPredictor:
         df["Inflation_change"] = df["inflation"].diff()
         df["GDP_rolling_3y"] = df["gdp"].rolling(3).mean()
         df["Inflation_rolling_3y"] = df["inflation"].rolling(3).mean()
+        if "precip_mm" in df.columns:
+            df["precip_lag1"] = df["precip_mm"].shift(1)
+            df["precip_rolling_3y"] = df["precip_mm"].rolling(3).mean()
+        if "temp_c" in df.columns:
+            df["temp_lag1"] = df["temp_c"].shift(1)
         return df.dropna()
 
     def prepare_data(self, df: pd.DataFrame, target_col: str,
@@ -52,6 +68,10 @@ class YieldPredictor:
                 "GDP_growth", "Inflation_change",
                 "GDP_rolling_3y", "Inflation_rolling_3y",
             ]
+            if "precip_lag1" in df.columns:
+                feature_cols += ["precip_lag1", "precip_rolling_3y"]
+            if "temp_lag1" in df.columns:
+                feature_cols += ["temp_lag1"]
 
         self.features = feature_cols
         X = df[feature_cols].values
@@ -63,7 +83,7 @@ class YieldPredictor:
         scores = cross_val_score(self.model, X, y, cv=tscv,
                                  scoring="neg_mean_squared_error")
         rmse_scores = np.sqrt(-scores)
-        print(f"Cross-val RMSE: {rmse_scores.mean():.2f} (+/- {rmse_scores.std():.2f})")
+        logger.info(f"Cross-val RMSE: {rmse_scores.mean():.2f} (+/- {rmse_scores.std():.2f})")
         X_scaled = self.scaler.fit_transform(X)
         self.model.fit(X_scaled, y)
         return self.model
@@ -104,7 +124,6 @@ class SupplyChainRiskModel:
     def compute_risk_score(self, df: pd.DataFrame) -> pd.DataFrame:
         df = df.copy()
         df = df.dropna(subset=["inflation", "gdp"])
-        from sklearn.preprocessing import StandardScaler
         scaler = StandardScaler()
         df["inflation_volatility"] = df["inflation"].rolling(3).std()
         df["gdp_growth"] = df["gdp"].pct_change() * 100
@@ -116,12 +135,23 @@ class SupplyChainRiskModel:
             [X_scaled[:, 0] * 0.4, X_scaled[:, 1] * 0.3, X_scaled[:, 2] * 0.3],
             axis=0,
         )
-        risk_df["risk_score"] = (risk_df["risk_score_raw"] - risk_df["risk_score_raw"].min()) / (
-            risk_df["risk_score_raw"].max() - risk_df["risk_score_raw"].min()
-        )
+        min_score = risk_df["risk_score_raw"].min()
+        max_score = risk_df["risk_score_raw"].max()
+        if max_score > min_score:
+            risk_df["risk_score"] = (risk_df["risk_score_raw"] - min_score) / (
+                max_score - min_score
+            )
+        else:
+            risk_df["risk_score"] = 0.5
         risk_df["risk_level"] = pd.cut(
             risk_df["risk_score"],
             bins=[-np.inf, 0.25, 0.5, 0.75, np.inf],
             labels=["Faible", "Modéré", "Élevé", "Critique"],
         )
+        try:
+            y_dummy = risk_df["risk_score"]
+            self.model.fit(X_scaled, y_dummy)
+            logger.debug("Risk model trained on scored data")
+        except Exception as e:
+            logger.warning(f"Could not train RF risk model: {e}")
         return risk_df

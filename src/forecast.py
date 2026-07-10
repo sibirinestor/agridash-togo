@@ -1,11 +1,14 @@
 import pandas as pd
 import numpy as np
+import logging
 from pathlib import Path
 import hashlib
 import os
 import tempfile
 
 os.environ.setdefault("MPLCONFIGDIR", str(Path(tempfile.gettempdir()) / "matplotlib"))
+
+logger = logging.getLogger(__name__)
 
 try:
     from prophet import Prophet
@@ -147,7 +150,7 @@ def generate_forecasts(use_cache: bool = True) -> pd.DataFrame:
                         "price_usd_t": round(price_trend, 1),
                     })
         except Exception as e:
-            print(f"  Prophet failed for {crop}: {e}")
+            logger.warning(f"  Prophet failed for {crop}: {e}")
 
     df = pd.DataFrame(records)
     df["production_t"] = df["production_t"].astype(float)
@@ -178,10 +181,11 @@ def get_forecast_summary(forecasts: pd.DataFrame) -> pd.DataFrame:
 
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
     fcst = generate_forecasts()
-    print(f"Prévisions générées: {len(fcst)} lignes")
+    logger.info(f"Prévisions générées: {len(fcst)} lignes")
     if len(fcst):
-        print(f"Cultures: {fcst['crop'].nunique()}")
-        print(f"Scénarios: {fcst['scenario'].unique()}")
+        logger.info(f"Cultures: {fcst['crop'].nunique()}")
+        logger.info(f"Scénarios: {fcst['scenario'].unique()}")
         summary = get_forecast_summary(fcst)
         print(summary.to_string())
