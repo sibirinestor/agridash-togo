@@ -32,6 +32,11 @@ COPY . /app/
 # Port par défaut pour Hugging Face Spaces (7860) ou Render (dynamique avec $PORT)
 EXPOSE 7860
 
-# Démarrer l'application avec Gunicorn.
-# Si $PORT n'est pas défini (Hugging Face ou local), on utilise 7860 par défaut.
-CMD gunicorn dashboard.app:server --bind 0.0.0.0:${PORT:-7860} --timeout 120 --workers 2
+# Copier le script d'entrée
+COPY docker-entrypoint.sh /app/
+
+# Rendre le script exécutable
+RUN chmod +x /app/docker-entrypoint.sh
+
+# Démarrer l'application avec Gunicorn
+CMD ["/app/docker-entrypoint.sh"]
