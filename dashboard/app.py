@@ -355,17 +355,17 @@ def update_kpis(years, cats, crops, theme):
 
     export_subtitle = f"{', '.join(sorted(export_crops['crop'].unique()))}" if len(export_crops) else "—"
     return [
-        kpi_card("fa-tractor", "Prod. Totale", fmt_t(prod_total),
-                 f"tonnes ({y_max}) | {n_crops} culture{'s' if n_crops>1 else ''}",
+        kpi_card("fa-tractor", "Production Totale", fmt_t(prod_total),
+                 f"tonnes ({y_max}) · {n_crops} culture{'s' if n_crops>1 else ''}",
                  COLORS["primary"], COLORS["primary"]),
-        kpi_card("fa-apple-alt", "Prod. Alimentaire", fmt_t(food_total),
-                 f"tonnes ({y_max}) | cultures de base",
+        kpi_card("fa-apple-alt", "Production Alimentaire", fmt_t(food_total),
+                 f"tonnes ({y_max}) · cultures de base",
                  COLORS["success"], COLORS["success"]),
-        kpi_card("fa-dollar-sign", "Valeur Export", f"{export_val:.0f}M$",
+        kpi_card("fa-dollar-sign", "Valeur Exportation", f"{export_val:.0f}M$",
                  export_subtitle,
                  COLORS["warning"], COLORS["warning"]),
-        kpi_card(ricon, "Risque", rc,
-             f"Score: {rs:.3f} | TCAM: {cagr:+.1f}%",
+        kpi_card(ricon, "Niveau de Risque", rc,
+             f"Score global: {rs:.3f} · TCAM: {cagr:+.1f}%",
                  COLORS[rcol], COLORS[rcol]),
     ]
 
@@ -539,6 +539,26 @@ def render_macro_tab(years, t):
 # ============================================================
 # TAB: CARTE
 # ============================================================
+def _map_legend():
+    ramp = MAP_RAMP
+    labels = ["<10%", "10-14%", "15-21%", "22-29%", "≥30%"]
+    return html.Div([
+        html.Span("Part nationale :", className="small text-muted me-2 fw-semibold"),
+        html.Div([
+            html.Div([
+                html.Div(style={
+                    "width": "24px", "height": "16px",
+                    "backgroundColor": c, "borderRadius": "3px",
+                    "display": "inline-block", "marginRight": "4px",
+                }),
+                html.Span(l, className="small text-muted"),
+            ], className="d-flex align-items-center me-3", style={"gap": "2px"})
+            for c, l in zip(ramp, labels)
+        ], className="d-flex flex-wrap align-items-center"),
+    ], className="d-flex flex-wrap align-items-center px-1 py-2",
+       style={"borderTop": "1px solid var(--border, #E8E8EE)"})
+
+
 def render_map_tab(t):
     return dbc.Row([
         dbc.Col([
@@ -546,9 +566,13 @@ def render_map_tab(t):
                 dbc.CardHeader([
                     html.I(className="fas fa-map-marked-alt me-1"),
                     "Carte Agricole du Togo",
-                    html.Span("  cliquer sur une région pour explorer", className="small text-muted fw-normal"),
+                    html.Span("  cliquer sur une région ⇢", className="small text-muted fw-normal"),
+                    html.Span(" | Part de la production nationale par région", className="small text-muted fw-normal ms-1 d-none d-md-inline"),
                 ], className="fw-bold"),
-                dbc.CardBody(dcc.Graph(id="map-chart", config={"displayModeBar": False})),
+                dbc.CardBody([
+                    dcc.Graph(id="map-chart", config={"displayModeBar": False}),
+                    _map_legend(),
+                ]),
             ], className="shadow-sm mb-4"),
         ], width=8),
         dbc.Col([
@@ -556,6 +580,7 @@ def render_map_tab(t):
                 dbc.CardHeader([
                     html.I(className="fas fa-table me-1"),
                     "Production par Région",
+                    html.Span("  (cliquez une région sur la carte)", className="small text-muted fw-normal"),
                 ], className="fw-bold"),
                 dbc.CardBody([
                     dash_table.DataTable(
@@ -569,26 +594,85 @@ def render_map_tab(t):
                         style_cell={"textAlign": "left", "padding": "8px",
                                     "backgroundColor": t["card_bg"], "color": t["text"]},
                         style_header={"fontWeight": "bold"},
+                        style_data_conditional=[
+                            {"if": {"column_id": "production_pct"},
+                             "fontWeight": "600"},
+                        ],
                         row_selectable="single",
                         selected_rows=[],
                     ),
-                    html.Div(id="region-detail", className="mt-3 small"),
-                    html.Hr(),
-                    html.H6([html.I(className="fas fa-industry me-1"), "Infrastructure PIA"], className="fw-bold"),
-                    html.P("La Plateforme Industrielle d'Adétikopé (PIA) est le hub "
-                           "agro-industriel stratégique pour la transformation locale.",
-                           className="small text-muted"),
-                    html.Ul([
-                        html.Li([html.I(className="fas fa-arrow-right fa-xs me-1"), "Transformation soja: huile, tourteau, lait"], className="small"),
-                        html.Li([html.I(className="fas fa-arrow-right fa-xs me-1"), "Égrenage coton: fibre, huile de coton"], className="small"),
-                        html.Li([html.I(className="fas fa-arrow-right fa-xs me-1"), "Décorticage noix de cajou"], className="small"),
-                        html.Li([html.I(className="fas fa-arrow-right fa-xs me-1"), "Minoterie maïs et manioc"], className="small"),
-                        html.Li([html.I(className="fas fa-arrow-right fa-xs me-1"), "Zone franche avec incentives fiscales"], className="small"),
-                    ], className="small"),
+                    html.Div(id="region-detail", className="mt-2"),
+                ]),
+            ], className="shadow-sm mb-4"),
+            dbc.Card([
+                dbc.CardHeader([
+                    html.I(className="fas fa-industry me-1"),
+                    html.Span("Infrastructure PIA", className="fw-bold"),
+                    dbc.Badge("Hub agro-industriel", color="success", className="ms-2", pill=True,
+                              style={"fontSize": "0.6rem", "fontWeight": 500}),
+                ]),
+                dbc.CardBody([
+                    html.P("La Plateforme Industrielle d'Adétikopé (PIA) transforme "
+                           "les matières premières localement.", className="small text-muted mb-2"),
+                    html.Div([
+                        html.Div([html.I(className="fas fa-check-circle fa-xs me-1", style={"color": "var(--good, #2E9F63)"}),
+                                   "Huile, tourteau, lait de soja"], className="small mb-1"),
+                        html.Div([html.I(className="fas fa-check-circle fa-xs me-1", style={"color": "var(--good, #2E9F63)"}),
+                                   "Fibre et huile de coton"], className="small mb-1"),
+                        html.Div([html.I(className="fas fa-check-circle fa-xs me-1", style={"color": "var(--good, #2E9F63)"}),
+                                   "Décorticage noix de cajou"], className="small mb-1"),
+                        html.Div([html.I(className="fas fa-check-circle fa-xs me-1", style={"color": "var(--good, #2E9F63)"}),
+                                   "Minoterie maïs et manioc"], className="small mb-1"),
+                        html.Div([html.I(className="fas fa-check-circle fa-xs me-1", style={"color": "var(--good, #2E9F63)"}),
+                                   "Zone franche avec incentives fiscales"], className="small"),
+                    ], className="ps-1"),
                 ]),
             ], className="shadow-sm"),
         ], width=4),
     ], className="g-3")
+
+
+def _region_detail_card(region_name, sel, crops):
+    prod_mt = sel.iloc[0]["production_t"] / 1e6
+    pct = sel.iloc[0]["production_pct"]
+    bar_color = COLORS["primary"]
+    ramp = MAP_RAMP
+    if pct >= 30:      bar_color = ramp[4]
+    elif pct >= 22:    bar_color = ramp[3]
+    elif pct >= 15:    bar_color = ramp[2]
+    elif pct >= 10:    bar_color = ramp[1]
+    else:              bar_color = ramp[0]
+    return html.Div([
+        html.Hr(style={"margin": "8px 0"}),
+        html.Div([
+            html.Div([
+                html.I(className="fas fa-map-marker-alt", style={"color": bar_color}),
+                html.Span(f" {region_name}", className="fw-bold"),
+            ], className="mb-1"),
+            html.Div([
+                html.Span(f"{prod_mt:.2f}M t", className="fw-bold",
+                          style={"fontSize": "1.15rem", "color": "var(--text)"}),
+                html.Span(f"  •  {pct:.1f}% du national", className="text-muted small"),
+            ], className="mb-1"),
+            html.Div(style={
+                "height": "6px", "width": "100%", "borderRadius": "3px",
+                "background": f"linear-gradient(to right, {bar_color} {pct}%, var(--grid, #EAEAEF) {pct}%)",
+                "marginBottom": "8px",
+            }),
+            html.Span("Top cultures :", className="small fw-semibold text-muted"),
+            html.Div([
+                html.Div([
+                    html.I(className="fas fa-seedling fa-xs me-1", style={"color": "var(--pbi-blue, #118DFF)"}),
+                    html.Span(f"{r['crop']}  ", className="small"),
+                    html.Span(f"{r['region_prod_t']/1e6:.2f}M t", className="small text-muted"),
+                ], className="mb-1")
+                for _, r in crops.head(4).iterrows()
+            ], className="ps-1 mt-1"),
+        ], className="p-2", style={
+            "backgroundColor": "var(--bg-alt, #F8F8FA)",
+            "borderRadius": "6px", "border": "1px solid var(--border, #E8E8EE)",
+        }),
+    ])
 
 
 @callback(
@@ -602,7 +686,6 @@ def render_map_tab(t):
 )
 def highlight_region(clickData, years, current_selection):
     rdf = togo_map.get_region_production_data(agri_data, years[1])
-
     ctx_trigger = dash.callback_context.triggered[0]["prop_id"] if dash.callback_context.triggered else ""
 
     if "map-chart.clickData" in ctx_trigger and clickData:
@@ -617,25 +700,7 @@ def highlight_region(clickData, years, current_selection):
             if len(sel):
                 idx = sel.index[0]
                 crops = togo_map.get_region_crops(agri_data, region_name, years[1])
-                detail = html.Div([
-                    html.P([html.I(className="fas fa-info-circle me-1"),
-                            f"Région sélectionnée: {region_name}"],
-                           className="fw-bold mb-2"),
-                    html.P([html.I(className="fas fa-seedling me-1"),
-                            f"Production: {sel.iloc[0]['production_t']/1e6:.2f}M t"],
-                           className="mb-1 small"),
-                    html.P([html.I(className="fas fa-percentage me-1"),
-                            f"Part nationale: {sel.iloc[0]['production_pct']:.1f}%"],
-                           className="mb-2 small"),
-                    html.Hr(style={"margin": "6px 0"}),
-                    html.P("Top cultures:", className="small fw-bold mb-1"),
-                    html.Ul(
-                        [html.Li(f"{r['crop']}: {r['region_prod_t']/1e6:.2f}M t",
-                                 className="small")
-                         for _, r in crops.head(4).iterrows()],
-                        className="mb-0 ps-3",
-                    ),
-                ])
+                detail = _region_detail_card(region_name, sel, crops)
                 return region_name, sel.to_dict("records"), [int(idx)], detail
         except Exception:
             pass
@@ -645,25 +710,7 @@ def highlight_region(clickData, years, current_selection):
         sel = rdf[rdf["region"] == current_selection]
         idx = int(sel.index[0])
         crops = togo_map.get_region_crops(agri_data, current_selection, years[1])
-        detail = html.Div([
-            html.P([html.I(className="fas fa-info-circle me-1"),
-                    f"Région: {current_selection}"],
-                   className="fw-bold mb-2"),
-            html.P([html.I(className="fas fa-seedling me-1"),
-                    f"Production: {sel.iloc[0]['production_t']/1e6:.2f}M t"],
-                   className="mb-1 small"),
-            html.P([html.I(className="fas fa-percentage me-1"),
-                    f"Part nationale: {sel.iloc[0]['production_pct']:.1f}%"],
-                   className="mb-2 small"),
-            html.Hr(style={"margin": "6px 0"}),
-            html.P("Top cultures:", className="small fw-bold mb-1"),
-            html.Ul(
-                [html.Li(f"{r['crop']}: {r['region_prod_t']/1e6:.2f}M t",
-                         className="small")
-                 for _, r in crops.head(4).iterrows()],
-                className="mb-0 ps-3",
-            ),
-        ])
+        detail = _region_detail_card(current_selection, sel, crops)
         return current_selection, sel.to_dict("records"), [idx], detail
 
     return "", rdf.to_dict("records"), [], html.Div()
@@ -715,7 +762,7 @@ def render_forecast_tab(years, crops, t):
                     dbc.CardBody([
                         html.H6(html.I(className="fas fa-calculator me-2"), className="fw-bold mb-2"),
                         html.H3("2025-2030", className="fw-bold text-primary mb-0"),
-                        html.Small("Période de prévision", className="text-muted"),
+                        html.Small("Période de prévision", className="text-muted fw-normal"),
                     ]),
                 ], className="shadow-sm text-center h-100"), width=3),
                 dbc.Col(dbc.Card([
