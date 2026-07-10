@@ -147,7 +147,7 @@ navbar = html.Div([
             dbc.NavbarToggler(id="navbar-toggler", className="border-0 ms-auto"),
             dbc.Collapse(
                 dbc.Nav([
-                    dbc.NavItem(dbc.NavLink([html.I(className=f"fas {icon} me-1"), label], href="#", id=tab_id, className="nav-custom-link"),
+                    dbc.NavItem(dbc.NavLink([html.I(className=f"fas {icon} me-1"), label], id=tab_id, className="nav-custom-link"),
                                className="nav-custom-item")
                     for (label, icon), tab_id in zip(TAB_LABELS, TAB_IDS)
                 ], navbar=True, className="mx-auto"),
@@ -247,6 +247,9 @@ app.layout = html.Div([
     dcc.Store(id="theme-store", data="light"),
     dcc.Store(id="active-tab", data="tab-dash"),
     dcc.Store(id="selected-region", data=""),
+    dcc.Store(id="store-years"),
+    dcc.Store(id="store-crops"),
+    dcc.Store(id="store-indicator"),
     dcc.Download(id="download-pdf"),
 ], id="app-container", **{'data-theme': 'light'})
 
@@ -370,19 +373,33 @@ def update_kpis(years, cats, crops, theme):
 # ============================================================
 # TAB RENDERER
 # ============================================================
+@callback(Output("store-years", "data"), Input("year-slider", "value"))
+def _sync_years(v): return v
+
+@callback(Output("store-crops", "data"), Input("crop-dropdown", "value"))
+def _sync_crops(v): return v
+
+@callback(Output("store-indicator", "data"), Input("indicator-dropdown", "value"))
+def _sync_indicator(v): return v
+
+from dash import no_update as _nu
+years_cur = _nu
+crops_cur = _nu
+indicator_cur = _nu
+
 @callback(Output("tab-content", "children"), Input("active-tab", "data"),
-          Input("year-slider", "value"), Input("crop-dropdown", "value"),
-          Input("indicator-dropdown", "value"), Input("theme-store", "data"))
-def render_tab(tab, years, crops, indicator, theme):
+          Input("theme-store", "data"), Input("store-years", "data"),
+          Input("store-crops", "data"), Input("store-indicator", "data"))
+def render_tab(tab, theme, sy, sc, si):
     t = THEMES.get(theme, THEMES["light"])
-    if tab == "tab-crops":    return render_crops_tab(years, crops or [], t)
-    if tab == "tab-macro":    return render_macro_tab(years, t)
+    if tab == "tab-crops":    return render_crops_tab(sy or [2010, 2024], sc or [], t)
+    if tab == "tab-macro":    return render_macro_tab(sy or [2010, 2024], t)
     if tab == "tab-map":      return render_map_tab(t)
-    if tab == "tab-climate":  return render_climate_tab(years, t)
-    if tab == "tab-forecast": return render_forecast_tab(years, crops or ["maïs", "soja", "coton"], t)
-    if tab == "tab-markets":  return render_markets_tab(years, crops or ["maïs"], t)
-    if tab == "tab-risks":    return render_risks_tab(years, t)
-    return render_dashboard_tab(years, crops or ["maïs", "soja", "coton"], indicator, t)
+    if tab == "tab-climate":  return render_climate_tab(sy or [2010, 2024], t)
+    if tab == "tab-forecast": return render_forecast_tab(sy or [2010, 2024], sc or ["maïs", "soja", "coton"], t)
+    if tab == "tab-markets":  return render_markets_tab(sy or [2010, 2024], sc or ["maïs"], t)
+    if tab == "tab-risks":    return render_risks_tab(sy or [2010, 2024], t)
+    return render_dashboard_tab(sy or [2010, 2024], sc or ["maïs", "soja", "coton"], si or "yield_t_ha", t)
 
 
 def section(title, graph_id, col_width=6, height=None):
