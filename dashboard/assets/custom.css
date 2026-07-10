@@ -1,185 +1,334 @@
-/* Custom styles for AgriDash Togo
-   - Define theme variables for light/dark
-   - Improve navbar, card, KPI and graph visuals
-   - Make layout more spacious and responsive
-*/
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+/* ===================================================================
+   AgriDash Togo — Power BI–style report theme
+   Light gray canvas + white cards, Segoe UI, flat header, one restrained
+   accent palette. No gradients / glassmorphism — data-analyst discipline:
+   one ink color for text, thin gridlines, minimal chart-junk.
+   Tokens mirror THEMES in dashboard/app.py (keep hex values in sync).
+   =================================================================== */
+
+/* ----------------------------------------------------------------- */
+/* Design tokens                                                     */
+/* ----------------------------------------------------------------- */
 :root{
-  --primary: #1a5276;
-  --secondary: #2e86c1;
-  --success: #27ae60;
-  --warning: #f39c12;
-  --danger: #e74c3c;
-  --muted: #6c757d;
-  --bg: #ffffff;
-  --card-bg: #ffffff;
-  --text: #2c3e50;
-  --glass: rgba(255,255,255,0.6);
+  --font-ui: "Segoe UI", "Segoe UI Web (West European)", -apple-system,
+             BlinkMacSystemFont, Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  /* Brand / accent — Power BI signature blue */
+  --pbi-blue:   #118DFF;
+  --pbi-blue-2: #0F6BBE;   /* hover / active */
+  --pbi-blue-3: #0B4DA0;   /* deep accent   */
+  --pbi-navy:   #12239E;
+
+  /* Categorical data palette (mirrors COLORS order in app.py) */
+  --c1:#118DFF; --c2:#0099A6; --c3:#2E9F63; --c4:#F2A93B;
+  --c5:#E66C37; --c6:#9C6ADE; --c7:#D13438; --c8:#12239E;
+
+  /* Semantic */
+  --good:   #2E9F63;
+  --warn:   #D98B2B;      /* darker amber — readable as text on light */
+  --bad:    #D13438;
+  --orange: #E66C37;
+  --teal:   #0099A6;
+
+  /* ---- Light theme (default) — Power BI canvas #F2F2F2 ---- */
+  --bg:        #F2F2F2;
+  --card-bg:   #FFFFFF;
+  --text:      #252423;   /* Power BI foreground gray */
+  --muted:     #605E5C;   /* secondary text           */
+  --faint:     #8A8880;
+  --border:    #E5E5E5;
+  --border-2:  #EDEDED;
+  --grid:      #EAEAEA;
+  --header-bg:   #FFFFFF;
+  --header-bd:   #E5E5E5;
+  --shadow:    0 1px 2px rgba(0,0,0,.05), 0 0 0 1px rgba(0,0,0,.02);
+  --shadow-lg: 0 2px 8px rgba(0,0,0,.07), 0 0 0 1px rgba(0,0,0,.02);
+  --item-hover:#F3F2F1;
+  --selected:  #DEECF9;   /* Power BI selection blue tint */
+  --radius:    6px;
+  --radius-sm: 4px;
 }
 
+/* ---- Dark theme — Power BI canvas #252423 ---- */
 [data-theme="dark"]{
-  --bg: #1a1d23;
-  --card-bg: #222428;
-  --text: #e0e0e0;
-  --glass: rgba(255,255,255,0.03);
+  --bg:        #252423;
+  --card-bg:   #2A2A2A;
+  --text:      #E6E6E6;
+  --muted:     #A8A8A8;
+  --faint:     #8A8880;
+  --border:    #3D3D3D;
+  --border-2:  #333333;
+  --grid:      #353535;
+  --header-bg:   #252423;
+  --header-bd:   #3D3D3D;
+  --shadow:    0 1px 2px rgba(0,0,0,.45), 0 0 0 1px rgba(0,0,0,.25);
+  --shadow-lg: 0 2px 8px rgba(0,0,0,.55), 0 0 0 1px rgba(0,0,0,.3);
+  --item-hover:#312F2E;
+  --selected:  #1A3A47;
 }
 
+/* ----------------------------------------------------------------- */
+/* Base / typography                                                  */
+/* ----------------------------------------------------------------- */
 html,body,#app-container{height:100%;}
 body{
-  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  font-family: var(--font-ui);
   background-color: var(--bg) !important;
   color: var(--text) !important;
+  font-size: 14px;
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
 }
-
-/* Navbar */
-.navbar{
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  border-bottom: 1px solid rgba(0,0,0,0.06);
+#app-container{
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  transition: background-color .2s ease, color .2s ease;
 }
-.navbar .navbar-brand, .navbar .nav-link{color: #fff !important}
+#main-container{ padding-top: 14px; padding-bottom: 28px; }
 
-/* Main container spacing */
-#main-container{padding-top:1rem; padding-bottom:2rem}
-
-/* Cards */
-.card{
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent), var(--card-bg) !important;
-  border-radius: 0.65rem;
-  border: 1px solid rgba(0,0,0,0.04) !important;
-}
-.card .card-header{background: transparent; border-bottom: none}
-
-/* Headings and typography */
-h1, h2, h3, h4, h5, h6 {font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto; margin:0}
-h1{font-size:1.6rem; font-weight:800}
-h2{font-size:1.25rem; font-weight:700}
+h1,h2,h3,h4,h5,h6{ font-family:var(--font-ui); margin:0; color:var(--text); }
+h1{font-size:1.5rem; font-weight:700}
+h2{font-size:1.2rem;  font-weight:700}
 h3{font-size:1.05rem; font-weight:600}
-.card-header h6{font-size:0.95rem; font-weight:700}
+h4{font-size:.95rem;  font-weight:600}
 
-/* KPI cards */
-.border-start{border-left-width:0.45rem !important;}
+p,span,div,label,td,th,li,small,.text-muted{ font-family:var(--font-ui); }
+.text-muted{ color: var(--muted) !important; }
 
-.kpi-compact .card-body{padding:0.9rem}
-.kpi-compact h3{font-size:1.45rem}
-.kpi-compact .small{color:var(--muted)}
+/* ----------------------------------------------------------------- */
+/* Bootstrap contextual→palette remap (buttons, badges, text)        */
+/* ----------------------------------------------------------------- */
+.text-primary{ color: var(--pbi-blue)  !important; }
+.text-success{ color: var(--good)      !important; }
+.text-warning{ color: var(--warn)      !important; }
+.text-danger { color: var(--bad)       !important; }
+.text-info   { color: var(--teal)      !important; }
 
-/* Make KPI cards more rounded and ensure the thick left border respects the radius */
-.card.kpi-compact{
-  border-radius: 0.9rem !important;
+.btn-primary{ background-color:var(--pbi-blue); border-color:var(--pbi-blue); color:#fff; }
+.btn-primary:hover{ background-color:var(--pbi-blue-2); border-color:var(--pbi-blue-2); }
+.btn-secondary{ background-color:#605E5C; border-color:#605E5C; color:#fff; }
+.btn-secondary:hover{ background-color:#4a4847; border-color:#4a4847; }
+.btn-success{ background-color:var(--good); border-color:var(--good); color:#fff; }
+.btn-success:hover{ filter:brightness(.92); }
+.btn-outline-primary{ color:var(--pbi-blue); border-color:var(--pbi-blue); background:transparent; }
+.btn-outline-primary:hover{ background-color:var(--pbi-blue); color:#fff; border-color:var(--pbi-blue); }
+.btn-outline-secondary{ color:var(--muted); border-color:var(--border); background:var(--card-bg); }
+.btn-outline-secondary:hover{ background-color:var(--item-hover); color:var(--text); border-color:var(--border); }
+.btn-outline-success{ color:var(--good); border-color:var(--good); background:transparent; }
+.btn-outline-success:hover{ background-color:var(--good); color:#fff; }
+
+/* ----------------------------------------------------------------- */
+/* Header / navbar — flat, no gradient                                */
+/* ----------------------------------------------------------------- */
+#navbar-container,
+.navbar{
+  background: var(--header-bg) !important;
+  box-shadow: none !important;
+  border-bottom: 1px solid var(--header-bd) !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-top: none !important;
+}
+.navbar{ padding: .35rem .75rem !important; min-height: 52px; }
+.navbar-toggler:focus{ box-shadow:none !important; border-color:var(--border); }
+
+/* brand */
+#brand .fw-bold{ color: var(--text) !important; font-weight:700; font-size:1rem; letter-spacing:-.01em; }
+#brand .fw-light{ color: var(--muted) !important; font-weight:500; }
+#brand .fa-leaf{ color: var(--good) !important; }
+
+/* nav links */
+.navbar .nav-custom-link{
+  padding: .42rem .8rem !important;
+  border-radius: var(--radius-sm) !important;
+  font-size: .85rem !important;
+  font-weight: 500 !important;
+  color: var(--muted) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  transition: background-color .15s ease, color .15s ease !important;
+  border: none !important;
+}
+.navbar .nav-custom-link:hover{
+  color: var(--text) !important;
+  background: var(--item-hover) !important;
+}
+.navbar .nav-custom-link.active{
+  color: var(--pbi-blue) !important;
+  background: var(--selected) !important;
+  font-weight: 600 !important;
+  box-shadow: inset 0 -2px 0 var(--pbi-blue) !important;
+}
+.navbar .nav-custom-link.active::after{ display:none; }
+.navbar .nav-custom-item{ margin: 0 1px !important; }
+.navbar .fa{ font-size:.92rem; }
+.navbar .btn{ border-radius: var(--radius-sm); font-size:.82rem; }
+.navbar .fa-leaf{ font-size:1.1rem; }
+
+[data-theme="dark"] .navbar .btn-outline-light{
+  color: var(--text); border-color: var(--border);
+}
+
+/* theme toggle switch */
+.form-check-input:checked{ background-color: var(--pbi-blue) !important; border-color: var(--pbi-blue) !important; }
+.form-check-input{ border-color: var(--border) !important; }
+
+/* ----------------------------------------------------------------- */
+/* Cards                                                              */
+/* ----------------------------------------------------------------- */
+.card{
+  background: var(--card-bg) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius) !important;
+  box-shadow: var(--shadow) !important;
+}
+.card .card-header{
+  background: transparent !important;
+  border-bottom: 1px solid var(--border-2) !important;
+  padding: .62rem .9rem !important;
+}
+.card .card-header h6,
+.card .card-header .fw-bold{
+  font-size: .82rem !important;
+  font-weight: 600 !important;
+  color: var(--text) !important;
+  letter-spacing: .01em;
+  display:flex; align-items:center; gap:.4rem;
+}
+.card .card-header .fa{ color: var(--pbi-blue); font-size:.85rem; }
+.card-header .small.text-muted{ font-size:.72rem; }
+.card .card-body{ padding: .85rem .9rem; }
+
+/* KPI cards — Power BI "card" visual */
+.kpi-card{
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius) !important;
+  box-shadow: var(--shadow) !important;
+  background: var(--card-bg) !important;
   overflow: hidden;
 }
-.card.kpi-compact{border-top-left-radius:0.9rem !important; border-bottom-left-radius:0.9rem !important}
-
-/* Navbar refinements */
-.navbar {
-  padding: 0.45rem 1rem;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+.kpi-card .kpi-accent{ height: 3px; width: 100%; }
+.kpi-body{ padding: .78rem .95rem .82rem !important; }
+.kpi-head{ display:flex; align-items:center; gap:.5rem; margin-bottom:.3rem; }
+.kpi-card .kpi-icon{ font-size:.92rem; }
+.kpi-label{
+  font-size:.72rem; font-weight:600; color:var(--muted);
+  letter-spacing:.01em; text-transform:none;
 }
-.navbar .navbar-brand { font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto; font-weight:700; color: #fff; }
-.navbar .nav-link { color: rgba(255,255,255,0.92); margin-right: 0.35rem; font-weight:600; }
-.navbar .nav-link:hover { color: #fff; opacity: 0.95; }
-.navbar .btn { padding: 0.35rem 0.6rem; font-size: 0.85rem; }
-.navbar .fa-*:before { vertical-align: baseline; }
-
-@media (max-width: 767px) {
-  .navbar .nav-link span { display: none; }
-  .navbar .navbar-brand { font-size: 1rem; }
+.kpi-value{
+  font-size:1.66rem; font-weight:600; line-height:1.15;
+  color:var(--text); letter-spacing:-.01em;
 }
+.kpi-sub{ font-size:.77rem; color:var(--muted); margin-top:.18rem; }
 
-/* Icon, spacing and color refinements */
-.navbar .fa { font-size: 0.98rem; margin-right: 0.4rem; }
-.navbar .fa-lg { font-size: 1.05rem; }
-.kpi-compact .fa { font-size: 1.15rem; color: var(--bs-primary); margin-right: 0.45rem; }
-.kpi-compact .value { font-weight:700; letter-spacing: -0.2px }
-.kpi-compact .small { font-size: 0.82rem }
+/* keep legacy class names quiet */
+.card.kpi-compact{ border-left:none !important; }
 
-/* Subtle primary tint for CTA-like controls */
-.navbar .btn-primary { background-color: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.12); color: #fff }
-.navbar .btn-primary:hover { background-color: rgba(255,255,255,0.16) }
-
-/* Slightly more breathing room for top-level content */
-.app-container { padding-top: 0.85rem }
-
-/* Graph container */
-.dcc-graph, .js-plotly-plot{background: transparent !important}
-.card .card-body .plotly-graph-div{background: transparent !important}
-
-/* Buttons */
-.btn[outline]{border-radius:0.45rem}
-
-/* Year preset buttons style (better affordance than badges) */
-.btn-group .btn{
-  border-radius: 0.45rem; padding: 0.35rem 0.6rem; font-size:0.85rem; min-width:64px;
+/* ----------------------------------------------------------------- */
+/* Filter / slicer strip                                              */
+/* ----------------------------------------------------------------- */
+#filtres-year-card, #filtres-card{
+  box-shadow: var(--shadow) !important;
+  background: var(--card-bg) !important;
 }
-.btn-group .btn:focus{box-shadow: 0 0 0 0.12rem rgba(46,134,193,0.16)}
-.btn-group .btn.active, .btn-group .btn:active{transform: translateY(1px)}
-
-/* Make preset controls and slider visually grouped */
-.btn-group{margin-bottom:0.5rem}
-.rc-slider{margin-top:0.25rem}
-
-/* Dropdowns and selects: increase touch target */
-.Select, .Select-control, .DashDropdown, .dropdown{min-height:38px}
-
-/* Improve slider marks legibility */
-.rc-slider-mark-text{font-size:0.78rem; color:var(--muted)}
-
-/* Slightly larger input labels and spacing */
-label.fw-semibold{font-size:0.92rem}
-
-/* Give filters card a subtle shadow and consistent padding */
-#filtres-card{box-shadow:0 4px 14px rgba(20,20,20,0.03)}
-
-/* Filtres card tweaks */
-#filtres-card{padding:0.25rem}
-#filtres-card .card-body{padding:0.75rem}
-
-/* Responsive tweaks */
-@media (max-width: 768px){
-  .navbar .d-none.d-md-inline{display:none !important}
-  #filtres-card .row > [class*="col-"]{margin-bottom:0.5rem}
-  .card{border-radius:0.5rem}
+#filtres-year-card .card-body,
+#filtres-card .card-body{ padding: .62rem .9rem; }
+#filtres-card label.fw-semibold{
+  font-size:.74rem; font-weight:600; color:var(--muted);
+  letter-spacing:.02em; text-transform:uppercase; margin-bottom:.28rem;
 }
+#filtres-card label .fa{ color: var(--pbi-blue); }
 
-/* PDF button focus */
-#btn-pdf{transition:transform .12s ease}
-#btn-pdf:active{transform:translateY(1px)}
-
-/* Improve table styling */
-.datatable td, .datatable th{vertical-align:middle}
-
-/* Navbar premium styling */
-.navbar .nav-custom-link {
-  padding: 0.4rem 0.85rem !important;
-  border-radius: 8px !important;
-  font-size: 0.85rem !important;
-  font-weight: 500 !important;
-  color: rgba(255,255,255,0.7) !important;
-  transition: all 0.2s ease !important;
-  position: relative !important;
+/* Range slider — Segoe-ish track + blue handles */
+.rc-slider{
+  height: 6px; border-radius: 3px;
+  background: var(--grid);
+  margin: .9rem 6px 1.1rem;
 }
-.navbar .nav-custom-link:hover {
-  color: #fff !important;
-  background: rgba(255,255,255,0.1) !important;
+.rc-slider-track{ background: var(--pbi-blue); }
+.rc-slider-handle{
+  border: 2px solid var(--pbi-blue);
+  background: #fff;
+  width: 16px; height: 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.25);
+  margin-top: -5px !important;
 }
-.navbar .nav-custom-link.active {
-  color: #fff !important;
-  background: rgba(255,255,255,0.12) !important;
-  box-shadow: inset 0 -2px 0 #2ecc71 !important;
+.rc-slider-handle:active, .rc-slider-handle:focus{ border-color: var(--pbi-blue-2); box-shadow:0 0 0 4px rgba(17,141,255,.18); }
+.rc-slider-mark-text{ font-size:.74rem; color:var(--faint); font-family:var(--font-ui); margin-top:6px; }
+.rc-slider-dot{ border-color: var(--border); background:#fff; }
+
+/* dcc.Dropdown */
+.Select-menu-outer, .Select-control{ border-radius: var(--radius-sm) !important; }
+.Select-control, .Select-multi-value-wrapper{ min-height: 36px; background: var(--card-bg); }
+.VirtualizedSelectOption{ font-size:.85rem; }
+.Select-value, .Select-input{ font-family:var(--font-ui); }
+.Select-placeholder{ color: var(--faint); }
+[data-theme="dark"] .Select-control *,
+[data-theme="dark"] .Select-placeholder{ background:#1f1e1d !important; color:var(--text) !important; }
+
+/* ----------------------------------------------------------------- */
+/* Buttons / groups                                                   */
+/* ----------------------------------------------------------------- */
+.btn-group{ gap:.3rem; }
+.btn-group .btn{ border-radius: var(--radius-sm) !important; padding:.32rem .7rem; font-size:.82rem; min-width:64px; }
+.btn-group .btn:focus{ box-shadow:0 0 0 .12rem rgba(17,141,255,.18); }
+#btn-pdf{ transition: transform .12s ease; }
+#btn-pdf:active{ transform: translateY(1px); }
+
+/* ----------------------------------------------------------------- */
+/* Plotly graphs                                                     */
+/* ----------------------------------------------------------------- */
+.dcc-graph, .js-plotly-plot{ background: transparent !important; }
+.card .card-body .plotly-graph-div{ background: transparent !important; }
+.modebar{ display:none !important; }
+
+/* ----------------------------------------------------------------- */
+/* dash_table — Power BI grid                                         */
+/* ----------------------------------------------------------------- */
+.dash-spreadsheet{ font-family: var(--font-ui) !important; font-size:12.5px; }
+.dash-spreadsheet table{ border-collapse: collapse; }
+.dash-spreadsheet th.dash-header,
+.dash-spreadsheet .column-header{
+  background: var(--card-bg) !important;
+  color: var(--text) !important;
   font-weight: 600 !important;
+  font-size: 12px !important;
+  border-bottom: 1px solid var(--border) !important;
+  padding: 7px 10px !important;
 }
-.navbar .nav-custom-link.active::after {
-  content: ''; position: absolute; bottom: 0; left: 25%;
-  width: 50%; height: 2px; background: #2ecc71; border-radius: 1px;
-}
-.navbar .nav-custom-item { margin: 0 1px !important; }
-@media (max-width: 991px) {
-  .navbar .nav-custom-link { padding: 0.6rem 1rem !important; }
-}
-.navbar-toggler:focus { box-shadow: none !important; }
-.form-check-input:checked { background-color: #2ecc71 !important; border-color: #2ecc71 !important; }
+.dash-spreadsheet td.unfreeze{ padding: 6px 10px !important; }
+.dash-spreadsheet .dash-cell{ border-color: var(--border-2) !important; }
+.dash-spreadsheet tr:hover{ background: var(--item-hover); }
+.dash-table-container .previous-next-container{ font-size:12px; }
+.dash-tooltip{ background: var(--text) !important; color: var(--card-bg) !important; }
 
-/* Smooth transitions for theme */
-*{transition:background-color .2s ease, color .2s ease, border-color .2s ease}
+/* ----------------------------------------------------------------- */
+/* Alerts                                                             */
+/* ----------------------------------------------------------------- */
+.alert{ border-radius: var(--radius); border:1px solid var(--border); background:var(--card-bg); }
+.alert-success{ border-color:#bfe5cc; }
+.alert-warning{ border-color:#f3d99a; }
+.alert-danger { border-color:#f0babd; }
+
+/* ----------------------------------------------------------------- */
+/* Misc                                                              */
+/* ----------------------------------------------------------------- */
+hr{ border-color: var(--border-2); opacity:1; }
+.shadow-sm{ box-shadow: var(--shadow) !important; }
+/* badge accent */
+.badge[style*="2ecc71"], #brand .badge{ border:1px solid rgba(46,159,99,.35) !important; }
+
+/* ----------------------------------------------------------------- */
+/* Responsive                                                        */
+/* ----------------------------------------------------------------- */
+@media (max-width: 991px){
+  .navbar .nav-custom-link{ padding:.55rem .9rem !important; }
+}
+@media (max-width: 768px){
+  .navbar .d-none.d-md-inline{ display:none !important; }
+  #filtres-card .row > [class*="col-"]{ margin-bottom:.6rem; }
+}
+
+/* Smooth theme transition */
+*{ transition: background-color .2s ease, color .2s ease, border-color .2s ease; }

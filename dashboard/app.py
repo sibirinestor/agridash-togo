@@ -74,26 +74,42 @@ DATA_YEAR_MAX = int(max(
     max(FORECAST_YEARS),
 ))
 
+# Power BI–inspired palette (hex values mirrored in dashboard/assets/custom.css).
+# Categorical order matches the CSS --c1..--c8 tokens so charts and UI agree.
 COLORS = {
-    "primary": "#1a5276", "secondary": "#2e86c1",
-    "success": "#27ae60", "warning": "#f39c12", "danger": "#e74c3c",
-    "dark": "#2c3e50", "light": "#ecf0f1",
-    "céréale": "#3498db", "tubercule": "#e67e22",
-    "oléagineux": "#2ecc71", "fibre": "#9b59b6", "export": "#f1c40f",
+    "primary": "#118DFF", "secondary": "#2396D4",
+    "success": "#2E9F63", "warning": "#F2A93B", "danger": "#D13438",
+    "dark": "#252423", "light": "#F2F2F2",
+    "céréale": "#118DFF", "tubercule": "#E66C37",
+    "oléagineux": "#F2A93B", "fibre": "#9C6ADE", "export": "#0099A6",
 }
+# Categorical colorway for traces that don't set an explicit color.
+COLORWAY = ["#118DFF", "#0099A6", "#2E9F63", "#F2A93B", "#E66C37", "#9C6ADE", "#D13438", "#12239E"]
+# Risk-level → color (semantic, consistent across gauge/pie/series).
+RISK_COLORS = {"Faible": "#2E9F63", "Modéré": "#F2A93B",
+               "Élevé": "#E66C37", "Critique": "#D13438"}
+# Sequential blue ramp (low→high) for the production map.
+MAP_RAMP = ["#E8F4FE", "#B4DAF6", "#6FB0E3", "#2E86D8", "#0B5DA8"]
+
+FONT_FAMILY = '"Segoe UI", "Segoe UI Web (West European)", -apple-system, BlinkMacSystemFont, Roboto, Arial, sans-serif'
 
 TOGO_GEOJSON = togo_map.load_geojson()
 REGION_NAME_MAP = togo_map.get_region_map()
 regions_df = togo_map.get_region_production_data(agri_data, 2024)
 
+# Theme tokens — mirror dashboard/assets/custom.css :root & [data-theme="dark"].
 THEMES = {
     "light": {
-        "bg": "#ffffff", "card_bg": "#ffffff", "text": "#2c3e50",
-        "border": "#dee2e6", "navbar": COLORS["primary"], "graph_bg": "#ffffff",
+        "bg": "#F2F2F2", "card_bg": "#FFFFFF", "text": "#252423",
+        "border": "#E5E5E5", "navbar": "#FFFFFF", "graph_bg": "#FFFFFF",
+        "muted": "#605E5C", "grid": "#EAEAEA", "header_bg": "#FFFFFF",
+        "header_bd": "#E5E5E5",
     },
     "dark": {
-        "bg": "#1a1d23", "card_bg": "#282c34", "text": "#e0e0e0",
-        "border": "#404040", "navbar": "#000000", "graph_bg": "#282c34",
+        "bg": "#252423", "card_bg": "#2A2A2A", "text": "#E6E6E6",
+        "border": "#3D3D3D", "navbar": "#252423", "graph_bg": "#2A2A2A",
+        "muted": "#A8A8A8", "grid": "#353535", "header_bg": "#252423",
+        "header_bd": "#3D3D3D",
     },
 }
 
@@ -112,24 +128,21 @@ TAB_LABELS = [("Vue", "fa-home"), ("Cultures", "fa-seedling"), ("Macro", "fa-cha
               ("Prévisions", "fa-chart-line"), ("Marchés", "fa-store"),
               ("Risques", "fa-exclamation-triangle")]
 
-navbar_style = {
-    "background": "linear-gradient(135deg, #0f2b44 0%, #1a5276 50%, #1e6d8f 100%)",
-    "boxShadow": "0 4px 24px rgba(0,0,0,0.18), 0 1px 4px rgba(0,0,0,0.12)",
-    "transition": "all 0.3s ease",
-    "borderBottom": "1px solid rgba(255,255,255,0.06)",
-}
+# Header is flat — colors come from CSS variables scoped on [data-theme].
+navbar_style = {}
 
 navbar = html.Div([
     dbc.Navbar(
         dbc.Container([
             html.Div([
-                html.Div(html.I(className="fas fa-leaf", style={"fontSize": "1.35rem", "color": "#2ecc71"}), className="me-2"),
+                html.Div(html.I(className="fas fa-leaf"), className="me-2"),
                 html.Div([
-                    html.Span("AgriDash", className="fw-bold", style={"fontSize": "1.1rem", "letterSpacing": "-0.02em"}),
-                    html.Span("Togo", className="fw-light ms-1", style={"fontSize": "1.1rem", "opacity": 0.8}),
+                    html.Span("AgriDash", className="fw-bold"),
+                    html.Span("Togo", className="fw-light ms-1"),
                 ], className="d-flex align-items-baseline"),
                 html.Span("PIA", className="badge rounded-pill ms-2 px-2",
-                          style={"fontSize": "0.6rem", "backgroundColor": "rgba(46,204,113,0.2)", "color": "#2ecc71", "border": "1px solid rgba(46,204,113,0.3)", "fontWeight": 500}),
+                          style={"fontSize": "0.6rem", "backgroundColor": "rgba(46,159,99,0.14)",
+                                 "color": "var(--good)", "border": "1px solid rgba(46,159,99,0.4)", "fontWeight": 600}),
             ], className="d-flex align-items-center flex-shrink-0", id="brand"),
             dbc.NavbarToggler(id="navbar-toggler", className="border-0 ms-auto"),
             dbc.Collapse(
@@ -142,14 +155,13 @@ navbar = html.Div([
             ),
             html.Div([
                 dbc.Button(html.I(className="fas fa-file-pdf"), id="btn-pdf", size="sm",
-                           color="light", outline=True, className="me-2 border-opacity-25",
-                           style={"borderColor": "rgba(255,255,255,0.3)"}),
+                           color="secondary", outline=True, className="me-2"),
                 dbc.Switch(id="theme-toggle", value=False,
-                           label=html.I(className="fas fa-moon", style={"color": "rgba(255,255,255,0.7)", "fontSize": "0.9rem"})),
+                           label=html.I(className="fas fa-moon", style={"color": "var(--muted)", "fontSize": "0.85rem"})),
             ], className="d-flex align-items-center flex-shrink-0 ms-2 d-none d-lg-flex"),
         ], fluid=True, className="d-flex flex-nowrap align-items-center px-3"),
-        sticky="top", className="mb-2 py-2",
-        style=navbar_style, dark=True,
+        sticky="top", className="mb-2",
+        style=navbar_style, dark=False,
     ),
 ], id="navbar-container", style=navbar_style)
 
@@ -236,9 +248,7 @@ app.layout = html.Div([
     dcc.Store(id="active-tab", data="tab-dash"),
     dcc.Store(id="selected-region", data=""),
     dcc.Download(id="download-pdf"),
-    html.Link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"),
-], id="app-container", **{'data-theme': 'light'}, style={"backgroundColor": THEMES["light"]["bg"], "minHeight": "100vh",
-                               "transition": "background 0.3s", "color": THEMES["light"]["text"]})
+], id="app-container", **{'data-theme': 'light'})
 
 
 # ============================================================
@@ -252,23 +262,10 @@ app.layout = html.Div([
     Input("theme-toggle", "value"),
 )
 def toggle_theme(dark):
-    t = THEMES["dark"] if dark else THEMES["light"]
+    # All visual tokens live in CSS variables scoped on [data-theme]; the only
+    # job here is to flip the attribute and broadcast the theme name to graphs.
     theme_name = "dark" if dark else "light"
-    card_style = {
-        "backgroundColor": t["card_bg"], "color": t["text"],
-        "border": f"1px solid {t['border']}", "transition": "all 0.3s",
-    }
-    navbar_bg = {
-        "background": "linear-gradient(135deg, #0f2b44 0%, #1a5276 50%, #1e6d8f 100%)" if not dark else
-                      "linear-gradient(135deg, #0a1628 0%, #0f2b44 50%, #143a52 100%)",
-        "boxShadow": "0 4px 24px rgba(0,0,0,0.18), 0 1px 4px rgba(0,0,0,0.12)",
-        "transition": "all 0.3s ease",
-        "borderBottom": "1px solid rgba(255,255,255,0.06)",
-    }
-    return theme_name, {
-        "backgroundColor": t["bg"], "minHeight": "100vh",
-        "transition": "background 0.3s", "color": t["text"],
-    }, card_style, card_style, theme_name, navbar_bg
+    return theme_name, {}, {}, {}, theme_name, {}
 
 @callback(Output("year-slider", "value"), Input("preset-hist", "n_clicks"),
           Input("preset-tout", "n_clicks"), Input("preset-fcst", "n_clicks"))
@@ -306,9 +303,6 @@ def filter_crops_by_cat(cats):
           Input("theme-store", "data"))
 def update_kpis(years, cats, crops, theme):
     y_min, y_max = years
-    is_dark = theme == "dark"
-    card_text = THEMES["dark"]["text"] if is_dark else "#2c3e50"
-    card_bg = THEMES["dark"]["card_bg"] if is_dark else "#ffffff"
 
     adf = agri_data[(agri_data["Year"] >= y_min) & (agri_data["Year"] <= y_max)].copy()
     if cats:
@@ -335,22 +329,18 @@ def update_kpis(years, cats, crops, theme):
     rcol = "success" if rc == "Faible" else "warning" if rc in ["Modéré","Élevé"] else "danger"
     ricon = "fa-check-circle" if rc == "Faible" else "fa-exclamation-triangle" if rc=="Modéré" else "fa-times-circle"
 
-    def kpi_card(icon, label, value, subtitle, color, border_color):
-        body_children = [
-            html.Div([
-                html.I(className=f"fas {icon} fa-lg me-2", style={"color": border_color}),
-                html.Span(label, className="small", style={"color": "#6c757d"}),
-            ]),
-        ]
-        body_children.extend([
-            html.H3(value, className="my-1 fw-bold", style={"color": color}),
-            html.P(subtitle, className="small mb-0", style={"color": "#6c757d"}),
-        ])
-
+    def kpi_card(icon, label, value, subtitle, color, _border_color):
         return dbc.Col(dbc.Card([
-            dbc.CardBody(body_children),
-        ], className="border-start border-4 shadow-sm h-100 kpi-compact",
-            style={"borderLeftColor": border_color, "backgroundColor": card_bg, "color": card_text}), width=3)
+            html.Div(className="kpi-accent", style={"backgroundColor": color}),
+            dbc.CardBody([
+                html.Div([
+                    html.I(className=f"fas {icon} kpi-icon", style={"color": color}),
+                    html.Span(label, className="kpi-label"),
+                ], className="kpi-head"),
+                html.Div(value, className="kpi-value"),
+                html.Div(subtitle, className="kpi-sub"),
+            ], className="kpi-body"),
+        ], className="kpi-card shadow-sm h-100"), width=3)
 
     def fmt_t(v):
         if v >= 1e6: return f"{v/1e6:.1f}M"
@@ -397,10 +387,10 @@ def render_tab(tab, years, crops, indicator, theme):
 
 def section(title, graph_id, col_width=6, height=None):
     return dbc.Col(dbc.Card([
-        dbc.CardHeader(html.H6(title, className="fw-bold mb-0")),
+        dbc.CardHeader(html.H6(title, className="mb-0")),
         dbc.CardBody(dcc.Graph(id=graph_id, config={"displayModeBar": False},
-                                style={"height": height or "auto"})),
-    ], className="shadow-sm h-100"), width=col_width)
+                                style={"height": height or 360})),
+    ], className="shadow-sm h-100 ds-section"), width=col_width)
 
 
 # ============================================================
@@ -942,12 +932,44 @@ def dl_xlsx(_):
 # ============================================================
 # GRAPH LAYOUT HELPER
 # ============================================================
+def _template(t):
+    """Plotly report theme: Segoe UI, muted axis ink, thin gridlines, dark
+    hover card. Inherited by every chart so the report reads as one system."""
+    dark = t is THEMES["dark"]
+    grid = t.get("grid", "#EAEAEA")
+    muted = t.get("muted", "#605E5C")
+    ink = t["text"]
+    axis_line = muted
+    axis_kw = dict(gridcolor=grid, zerolinecolor=grid, ticks="outside",
+                   tickcolor=axis_line, ticklen=3, tickwidth=1,
+                   tickfont=dict(color=muted, size=10, family=FONT_FAMILY),
+                   title_font=dict(size=11, color=muted, family=FONT_FAMILY),
+                   automargin=True, showgrid=True)
+    return go.layout.Template(layout=go.Layout(
+        font=dict(family=FONT_FAMILY, size=12, color=ink),
+        colorway=COLORWAY,
+        hoverlabel=dict(bgcolor="#252423", bordercolor="#3D3D3D",
+                        font=dict(color="#FFFFFF", family=FONT_FAMILY, size=12)),
+        xaxis=dict(showline=True, linecolor=axis_line, linewidth=1, **axis_kw),
+        yaxis=dict(showline=False, linecolor=grid, linewidth=0, **axis_kw),
+        legend=dict(font=dict(family=FONT_FAMILY, size=11, color=muted),
+                   bgcolor="rgba(0,0,0,0)", borderwidth=0,
+                   orientation="h", yanchor="bottom", y=1.02,
+                   xanchor="left", x=0),
+        margin=dict(l=44, r=16, t=16, b=34),
+    ))
+
+
 def base_layout(t=None):
-    return dict(template="plotly_white", hovermode="x unified",
-                margin=dict(l=10, r=10, t=10, b=10),
-                paper_bgcolor=(t or THEMES["light"])["card_bg"],
-                plot_bgcolor=(t or THEMES["light"])["card_bg"],
-                font=dict(color=(t or THEMES["light"])["text"]))
+    t = t or THEMES["light"]
+    return dict(
+        template=_template(t),
+        paper_bgcolor=t["card_bg"],
+        plot_bgcolor=t["card_bg"],
+        font=dict(family=FONT_FAMILY, size=12, color=t["text"]),
+        margin=dict(l=44, r=16, t=16, b=34),
+        hovermode="x unified",
+    )
 
 
 # ============================================================
@@ -1020,9 +1042,11 @@ def _gauge(years, theme):
     fig = go.Figure(go.Indicator(mode="gauge+number", value=val,
         number={"suffix": "%"}, gauge={"axis":{"range":[0,100]},
         "bar":{"color":COLORS["primary"]},
-        "steps":[{"range":[0,25],"color":"#d5f5e3"},{"range":[25,50],"color":"#fef9e7"},
-                 {"range":[50,75],"color":"#fadbd8"},{"range":[75,100],"color":"#f1948a"}],
-        "threshold":{"line":{"color":"red","width":4},"thickness":0.75,"value":75}},
+        "steps":[{"range":[0,25],"color":"rgba(46,159,99,0.15)"},
+                 {"range":[25,50],"color":"rgba(242,169,55,0.15)"},
+                 {"range":[50,75],"color":"rgba(230,108,55,0.15)"},
+                 {"range":[75,100],"color":"rgba(211,52,56,0.15)"}],
+        "threshold":{"line":{"color":COLORS["danger"],"width":4},"thickness":0.75,"value":75}},
         title={"text": f"Risque: {lvl}"}))
     fig.update_layout(**base_layout(t), height=200)
     return fig
@@ -1040,7 +1064,7 @@ def _indicator(years, ind, theme):
         fig = go.Figure()
         fig.add_trace(go.Scatter(x=df["Year"], y=y, mode="lines+markers",
             line=dict(width=3, color=COLORS["primary"]),
-            fill="tozeroy", fillcolor="rgba(26,82,118,0.12)"))
+            fill="tozeroy", fillcolor="rgba(17,141,255,0.12)"))
         fig.update_layout(**base_layout(t), showlegend=False)
         fig.update_yaxes(title=label); return fig
     return go.Figure()
@@ -1191,22 +1215,18 @@ def _map(years, theme, crops, selected_region):
     )
 
     def region_color(value):
-        if value >= 30:
-            return "#084594"
-        if value >= 22:
-            return "#2171b5"
-        if value >= 15:
-            return "#4292c6"
-        if value >= 10:
-            return "#9ecae1"
-        return "#deebf7"
+        if value >= 30: return MAP_RAMP[4]
+        if value >= 22: return MAP_RAMP[3]
+        if value >= 15: return MAP_RAMP[2]
+        if value >= 10: return MAP_RAMP[1]
+        return MAP_RAMP[0]
 
     fig = go.Figure()
 
     # Draw the Togo GeoJSON polygons directly, without any basemap.
     for i, row in rdf.iterrows():
         is_selected = selected_region and row["region"] == selected_region
-        line_color = "#f1c40f" if is_selected else "#ffffff"
+        line_color = COLORS["primary"] if is_selected else "#ffffff"
         line_width = 4 if is_selected else 1.8
 
         feat = [f for f in geojson["features"] if f["properties"]["shapeName"] == row["geojson_key"]]
@@ -1290,17 +1310,15 @@ def _map(years, theme, crops, selected_region):
 def _risk_ts(years, theme):
     t = THEMES[theme]
     rdf = risk_df[(risk_df["Year"] >= years[0]) & (risk_df["Year"] <= years[1])]
-    colors = {"Faible": COLORS["success"], "Modéré": COLORS["warning"],
-              "Élevé": COLORS["danger"], "Critique": "#7b241c"}
     fig = go.Figure()
     for lvl in ["Faible","Modéré","Élevé","Critique"]:
         sub = rdf[rdf["risk_level"]==lvl]
         if len(sub):
             fig.add_trace(go.Scatter(x=sub["Year"], y=sub["risk_score"],
-                mode="markers+lines", name=lvl, marker=dict(size=10, color=colors[lvl]),
-                line=dict(color=colors[lvl], width=1, dash="dot")))
-    fig.add_hrect(y0=0.75,y1=1,fillcolor="red",opacity=0.05,line_width=0)
-    fig.add_hrect(y0=0.5,y1=0.75,fillcolor="orange",opacity=0.05,line_width=0)
+                mode="markers+lines", name=lvl, marker=dict(size=10, color=RISK_COLORS[lvl]),
+                line=dict(color=RISK_COLORS[lvl], width=1, dash="dot")))
+    fig.add_hrect(y0=0.75,y1=1,fillcolor="rgba(211,52,56,0.06)",line_width=0)
+    fig.add_hrect(y0=0.5,y1=0.75,fillcolor="rgba(230,108,55,0.06)",line_width=0)
     fig.update_layout(**base_layout(t), legend=dict(orientation="h", y=1.02))
     fig.update_yaxes(title="Score de Risque", range=[0,1]); return fig
 
@@ -1309,8 +1327,7 @@ def _risk_pie(years, theme):
     t = THEMES[theme]
     rdf = risk_df[(risk_df["Year"] >= years[0]) & (risk_df["Year"] <= years[1])]
     counts = rdf["risk_level"].value_counts()
-    cmap = {"Faible": COLORS["success"], "Modéré": COLORS["warning"],
-            "Élevé": COLORS["danger"], "Critique": "#7b241c"}
+    cmap = RISK_COLORS
     fig = go.Figure(data=[go.Pie(labels=counts.index, values=counts.values, hole=0.4,
         marker=dict(colors=[cmap.get(l,"#999") for l in counts.index]),
         textinfo="label+percent")])
@@ -1339,7 +1356,7 @@ def _climate_temp(years, theme):
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=df["Year"], y=df["temp_c"], mode="lines+markers",
         name="Température", line=dict(width=3, color=COLORS["danger"]),
-        fill="tozeroy", fillcolor="rgba(231,76,60,0.12)"))
+        fill="tozeroy", fillcolor="rgba(211,52,56,0.12)"))
     fig.add_hline(y=df["temp_c"].mean(), line_dash="dash", line_color="#666",
         annotation_text=f"Moy. {df['temp_c'].mean():.1f}°C")
     fig.update_layout(**base_layout(t), showlegend=True)
@@ -1692,9 +1709,9 @@ def _forecast_risk_gauge(years, crops, scenario, theme):
             "bgcolor": "rgba(0,0,0,0)",
             "borderwidth": 0,
             "steps": [
-                {"range": [0, 30], "color": "rgba(39,174,96,0.15)"},
-                {"range": [30, 60], "color": "rgba(243,156,18,0.15)"},
-                {"range": [60, 100], "color": "rgba(231,76,60,0.15)"},
+                {"range": [0, 30], "color": "rgba(46,159,99,0.15)"},
+                {"range": [30, 60], "color": "rgba(242,169,55,0.15)"},
+                {"range": [60, 100], "color": "rgba(211,52,56,0.15)"},
             ],
             "threshold": {
                 "line": {"color": COLORS["danger"], "width": 3},
