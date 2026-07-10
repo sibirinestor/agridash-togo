@@ -22,6 +22,8 @@ from src.config import ALL_CROPS, DATA_DIR
 FORECAST_YEARS = list(range(2025, 2031))
 CACHE_FILE = DATA_DIR / "togo_forecasts.csv"
 
+CONFIDENCE_LEVEL = 1.96
+
 
 def _train_prophet(y: np.ndarray, years: np.ndarray):
     if Prophet is None:
@@ -47,26 +49,32 @@ def _predict_prophet(m: Prophet, years: list) -> pd.DataFrame:
 
 
 def _predict_trend(y: np.ndarray, years: np.ndarray, future_years: list) -> pd.DataFrame:
-    degree = 2 if len(years) >= 8 else 1
+    n = len(y)
+    degree = min(2, n - 2) if n >= 4 else 1
     coeffs = np.polyfit(years, y, degree)
     model = np.poly1d(coeffs)
     fitted = model(years)
-    residual_std = float(np.std(y - fitted)) if len(y) > degree + 1 else 0.0
+    residuals = y - fitted
+    residual_std = float(np.std(residuals)) if n > degree + 1 else 0.0
     residual_std = max(residual_std, float(np.mean(y)) * 0.05)
     yhat = model(np.asarray(future_years))
     yhat = np.maximum(yhat, 0.01)
+    margin = CONFIDENCE_LEVEL * residual_std
     return pd.DataFrame({
         "ds": pd.to_datetime(future_years, format="%Y"),
         "yhat": yhat,
-        "yhat_lower": np.maximum(yhat - residual_std, 0.01),
-        "yhat_upper": yhat + residual_std,
+        "yhat_lower": np.maximum(yhat - margin, 0.01),
+        "yhat_upper": yhat + margin,
     })
 
 
 def _forecast_yields(yields: np.ndarray, years: np.ndarray) -> pd.DataFrame:
     if Prophet is not None:
-        model = _train_prophet(yields, years)
-        return _predict_prophet(model, FORECAST_YEARS)
+        try:
+            model = _train_prophet(yields, years)
+            return _predict_prophet(model, FORECAST_YEARS)
+        except Exception as e:
+            logger.warning(f"Prophet failed: {e}, falling back to trend")
     return _predict_trend(yields, years, FORECAST_YEARS)
 
 
@@ -76,19 +84,41 @@ def _rng_for(*parts: str) -> np.random.Generator:
     return np.random.default_rng(seed)
 
 
-def _apply_climate_scenario(
-    base_fcst: pd.DataFrame, scenario: str,
-) -> pd.DataFrame:
-    fcst = base_fcst.copy()
+def _estimate_area_trend(areas: np.ndarray, years: np.ndarray) -> float:
+    if len(areas) < 3:
+        return 0.015
+    coeffs = np.polyfit(years, np.log(areas), 1)
+    annual_growth = float(coeffs[0])
+    return np.clip(annual_growth, -0.02, 0.06)
+
+
+def _estimate_price_trend(prices: np.ndarray, years: np.ndarray) -> float:
+    valid = prices[~np.isnan(prices)]
+    if len(valid) < 3:
+        return 0.02
+    coeffs = np.polyfit(years[-len(valid):], np.log(valid), 1)
+    return float(np.clip(coeffs[0], -0.03, 0.08))
+
+
+def _climate_scenario_multipliers(climate: pd.DataFrame, scenario: str) -> float:
+    if climate.empty:
+        return 1.12 if scenario == "optimiste" else 0.85 if scenario == "pessimiste" else 1.0
+    natl = climate[climate["Region"] == "National"].sort_values("Year")
+    if len(natl) < 5:
+        return 1.12 if scenario == "optimiste" else 0.85 if scenario == "pessimiste" else 1.0
+    recent = natl[natl["Year"] >= 2015]
+    if len(recent) < 3:
+        return 1.12 if scenario == "optimiste" else 0.85 if scenario == "pessimiste" else 1.0
+    precip_std = recent["precip_mm"].std()
+    temp_range = recent["temp_c"].max() - recent["temp_c"].min()
+    precip_var = np.clip(precip_std / recent["precip_mm"].mean(), 0.05, 0.30)
+    temp_var = np.clip(temp_range / 2.0, 0.01, 0.08)
+    total_var = precip_var + temp_var
     if scenario == "optimiste":
-        fcst["yhat"] = fcst["yhat"] * 1.12
-        fcst["yhat_lower"] = fcst["yhat_lower"] * 1.08
-        fcst["yhat_upper"] = fcst["yhat_upper"] * 1.15
+        return 1.0 + total_var
     elif scenario == "pessimiste":
-        fcst["yhat"] = fcst["yhat"] * 0.85
-        fcst["yhat_lower"] = fcst["yhat_lower"] * 0.80
-        fcst["yhat_upper"] = fcst["yhat_upper"] * 0.90
-    return fcst
+        return 1.0 - total_var * 1.2
+    return 1.0
 
 
 def generate_forecasts(use_cache: bool = True) -> pd.DataFrame:
@@ -99,40 +129,72 @@ def generate_forecasts(use_cache: bool = True) -> pd.DataFrame:
 
     agri = get_togo_agriculture_data()
     climate = get_togo_climate_data()
-    natl = climate[climate["Region"] == "National"]
+
+    agri_by_crop = {}
+    for crop in sorted(ALL_CROPS):
+        df_crop = agri[agri["crop"] == crop].sort_values("Year")
+        if len(df_crop) >= 3:
+            agri_by_crop[crop] = df_crop
+        else:
+            logger.info(f"  {crop}: seulement {len(df_crop)} points, on utilise la moyenne du groupe")
+
+    global_means = agri.groupby("Year").agg(
+        yield_t_ha=("yield_t_ha", "mean"),
+        area_ha=("area_ha", "mean"),
+        production_t=("production_t", "mean"),
+    ).reset_index()
 
     records = []
     for crop in sorted(ALL_CROPS):
-        df_crop = agri[agri["crop"] == crop].copy()
-        if len(df_crop) < 5:
-            continue
+        if crop in agri_by_crop:
+            df_crop = agri_by_crop[crop]
+        else:
+            df_crop = global_means.copy()
+            df_crop["crop"] = crop
+            df_crop["category"] = ALL_CROPS[crop]["category"]
+            df_crop["staple"] = ALL_CROPS[crop]["staple"]
 
         df_crop = df_crop.sort_values("Year")
         years = df_crop["Year"].values
         yields = df_crop["yield_t_ha"].values
+        areas = df_crop["area_ha"].values
 
         try:
             fcst = _forecast_yields(yields, years)
 
+            optim_mult = _climate_scenario_multipliers(climate, "optimiste")
+            pess_mult = _climate_scenario_multipliers(climate, "pessimiste")
+
+            area_trend = _estimate_area_trend(areas, years)
+            base_price = CROP_PARAMS.get(crop, {}).get("price_range", (200, 1000))
+            price_mid = (base_price[0] + base_price[1]) / 2
+
             for scenario in ["modéré", "optimiste", "pessimiste"]:
-                sfcst = _apply_climate_scenario(fcst, scenario) if scenario != "modéré" else fcst
+                if scenario == "optimiste":
+                    y_mult = optim_mult
+                    a_rate = area_trend + 0.01
+                elif scenario == "pessimiste":
+                    y_mult = pess_mult
+                    a_rate = max(area_trend - 0.01, -0.02)
+                else:
+                    y_mult = 1.0
+                    a_rate = area_trend
+
                 params = CROP_PARAMS.get(crop, {
                     "yield_range": (max(float(yields.min()) * 0.5, 0.01), float(yields.max()) * 1.5),
                     "price_range": (200, 1000),
                 })
-                base_yield = yields[-1]
-                base_area = df_crop["area_ha"].values[-1]
+                base_area = areas[-1]
                 rng = _rng_for(crop, scenario)
 
                 for i, year in enumerate(FORECAST_YEARS):
-                    yhat = sfcst.iloc[i]["yhat"]
+                    yhat = fcst.iloc[i]["yhat"] * y_mult
                     yhat = max(yhat, params["yield_range"][0] * 0.5)
 
-                    area_growth = 1.0 + (i / len(FORECAST_YEARS)) * 0.08
-                    area = base_area * area_growth * rng.uniform(0.95, 1.05)
+                    area = base_area * (1 + a_rate) ** (i + 1) * rng.uniform(0.97, 1.03)
 
-                    price = rng.uniform(params["price_range"][0], params["price_range"][1])
-                    price_trend = price * (1 + i * 0.02)
+                    price = price_mid * rng.uniform(0.90, 1.10)
+                    price_trend = price * (1 + i * 0.025)
 
                     production = yhat * area
 
@@ -143,20 +205,21 @@ def generate_forecasts(use_cache: bool = True) -> pd.DataFrame:
                         "staple": ALL_CROPS[crop]["staple"],
                         "scenario": scenario,
                         "yield_t_ha": round(yhat, 3),
-                        "yield_lower": round(max(sfcst.iloc[i]["yhat_lower"], params["yield_range"][0] * 0.3), 3),
-                        "yield_upper": round(sfcst.iloc[i]["yhat_upper"], 3),
+                        "yield_lower": round(max(fcst.iloc[i]["yhat_lower"] * y_mult, params["yield_range"][0] * 0.3), 3),
+                        "yield_upper": round(fcst.iloc[i]["yhat_upper"] * y_mult, 3),
                         "area_ha": round(area),
                         "production_t": round(production),
                         "price_usd_t": round(price_trend, 1),
                     })
         except Exception as e:
-            logger.warning(f"  Prophet failed for {crop}: {e}")
+            logger.warning(f"  Forecast failed for {crop}: {e}")
 
     df = pd.DataFrame(records)
     df["production_t"] = df["production_t"].astype(float)
     if len(df) > 0:
         DATA_DIR.mkdir(parents=True, exist_ok=True)
         df.to_csv(CACHE_FILE, index=False)
+    logger.info(f"Prévisions: {df['crop'].nunique()}/13 cultures, {len(df)} lignes")
     return df
 
 
@@ -172,10 +235,10 @@ def get_forecast_summary(forecasts: pd.DataFrame) -> pd.DataFrame:
         category=("category", "first"),
     ).reset_index()
     summary["yield_change_pct"] = (
-        (summary["yield_2030"] - summary["yield_2025"]) / summary["yield_2025"] * 100
+        (summary["yield_2030"] - summary["yield_2025"]) / summary["yield_2025"].replace(0, pd.NA) * 100
     )
     summary["prod_change_pct"] = (
-        (summary["prod_2030"] - summary["prod_2025"]) / summary["prod_2025"] * 100
+        (summary["prod_2030"] - summary["prod_2025"]) / summary["prod_2025"].replace(0, pd.NA) * 100
     )
     return summary
 
