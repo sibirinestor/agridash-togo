@@ -100,16 +100,16 @@ regions_df = togo_map.get_region_production_data(agri_data, 2024)
 # Theme tokens — mirror dashboard/assets/custom.css :root & [data-theme="dark"].
 THEMES = {
     "light": {
-        "bg": "#F2F2F2", "card_bg": "#FFFFFF", "text": "#252423",
-        "border": "#E5E5E5", "navbar": "#FFFFFF", "graph_bg": "#FFFFFF",
-        "muted": "#605E5C", "grid": "#EAEAEA", "header_bg": "#FFFFFF",
-        "header_bd": "#E5E5E5",
+        "bg": "#FFFFFF", "card_bg": "#FFFFFF", "text": "#1A1A2E",
+        "border": "#E8E8EE", "navbar": "#FFFFFF", "graph_bg": "#FFFFFF",
+        "muted": "#5C5C6E", "grid": "#EAEAEF", "header_bg": "#FFFFFF",
+        "header_bd": "#E8E8EE",
     },
     "dark": {
-        "bg": "#252423", "card_bg": "#2A2A2A", "text": "#E6E6E6",
-        "border": "#3D3D3D", "navbar": "#252423", "graph_bg": "#2A2A2A",
-        "muted": "#A8A8A8", "grid": "#353535", "header_bg": "#252423",
-        "header_bd": "#3D3D3D",
+        "bg": "#1A1A2E", "card_bg": "#252540", "text": "#EAEAEF",
+        "border": "#353550", "navbar": "#1A1A2E", "graph_bg": "#252540",
+        "muted": "#9E9EB0", "grid": "#30304A", "header_bg": "#1A1A2E",
+        "header_bd": "#353550",
     },
 }
 

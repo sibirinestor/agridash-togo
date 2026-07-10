@@ -1,9 +1,6 @@
 /* ===================================================================
-   AgriDash Togo — Power BI–style report theme
-   Light gray canvas + white cards, Segoe UI, flat header, one restrained
-   accent palette. No gradients / glassmorphism — data-analyst discipline:
-   one ink color for text, thin gridlines, minimal chart-junk.
-   Tokens mirror THEMES in dashboard/app.py (keep hex values in sync).
+   AgriDash Togo — Power BI Pro design
+   Fond blanc, data-first, professionnel
    =================================================================== */
 
 /* ----------------------------------------------------------------- */
@@ -13,58 +10,56 @@
   --font-ui: "Segoe UI", "Segoe UI Web (West European)", -apple-system,
              BlinkMacSystemFont, Roboto, "Helvetica Neue", Arial, sans-serif;
 
-  /* Brand / accent — Power BI signature blue */
   --pbi-blue:   #118DFF;
-  --pbi-blue-2: #0F6BBE;   /* hover / active */
-  --pbi-blue-3: #0B4DA0;   /* deep accent   */
+  --pbi-blue-2: #0F6BBE;
+  --pbi-blue-3: #0B4DA0;
   --pbi-navy:   #12239E;
 
-  /* Categorical data palette (mirrors COLORS order in app.py) */
   --c1:#118DFF; --c2:#0099A6; --c3:#2E9F63; --c4:#F2A93B;
   --c5:#E66C37; --c6:#9C6ADE; --c7:#D13438; --c8:#12239E;
 
-  /* Semantic */
   --good:   #2E9F63;
-  --warn:   #D98B2B;      /* darker amber — readable as text on light */
+  --warn:   #D98B2B;
   --bad:    #D13438;
   --orange: #E66C37;
   --teal:   #0099A6;
 
-  /* ---- Light theme (default) — Power BI canvas #F2F2F2 ---- */
-  --bg:        #F2F2F2;
+  --bg:        #FFFFFF;
+  --bg-alt:    #F8F8FA;
   --card-bg:   #FFFFFF;
-  --text:      #252423;   /* Power BI foreground gray */
-  --muted:     #605E5C;   /* secondary text           */
-  --faint:     #8A8880;
-  --border:    #E5E5E5;
-  --border-2:  #EDEDED;
-  --grid:      #EAEAEA;
+  --text:      #1A1A2E;
+  --muted:     #5C5C6E;
+  --faint:     #8A8A9E;
+  --border:    #E8E8EE;
+  --border-2:  #F0F0F4;
+  --grid:      #EAEAEF;
   --header-bg:   #FFFFFF;
-  --header-bd:   #E5E5E5;
-  --shadow:    0 1px 2px rgba(0,0,0,.05), 0 0 0 1px rgba(0,0,0,.02);
-  --shadow-lg: 0 2px 8px rgba(0,0,0,.07), 0 0 0 1px rgba(0,0,0,.02);
-  --item-hover:#F3F2F1;
-  --selected:  #DEECF9;   /* Power BI selection blue tint */
-  --radius:    6px;
-  --radius-sm: 4px;
+  --header-bd:   #E8E8EE;
+  --shadow:    0 1px 3px rgba(26,26,46,.06), 0 0 0 1px rgba(26,26,46,.02);
+  --shadow-lg: 0 4px 12px rgba(26,26,46,.07), 0 0 0 1px rgba(26,26,46,.02);
+  --item-hover:#F3F2F8;
+  --selected:  #DEECF9;
+  --radius:    8px;
+  --radius-sm: 6px;
+  --transition: .18s ease;
 }
 
-/* ---- Dark theme — Power BI canvas #252423 ---- */
 [data-theme="dark"]{
-  --bg:        #252423;
-  --card-bg:   #2A2A2A;
-  --text:      #E6E6E6;
-  --muted:     #A8A8A8;
-  --faint:     #8A8880;
-  --border:    #3D3D3D;
-  --border-2:  #333333;
-  --grid:      #353535;
-  --header-bg:   #252423;
-  --header-bd:   #3D3D3D;
-  --shadow:    0 1px 2px rgba(0,0,0,.45), 0 0 0 1px rgba(0,0,0,.25);
-  --shadow-lg: 0 2px 8px rgba(0,0,0,.55), 0 0 0 1px rgba(0,0,0,.3);
-  --item-hover:#312F2E;
-  --selected:  #1A3A47;
+  --bg:        #1A1A2E;
+  --bg-alt:    #1F1F35;
+  --card-bg:   #252540;
+  --text:      #EAEAEF;
+  --muted:     #9E9EB0;
+  --faint:     #7A7A8E;
+  --border:    #353550;
+  --border-2:  #2D2D48;
+  --grid:      #30304A;
+  --header-bg:   #1A1A2E;
+  --header-bd:   #353550;
+  --shadow:    0 1px 3px rgba(0,0,0,.35), 0 0 0 1px rgba(0,0,0,.2);
+  --shadow-lg: 0 4px 12px rgba(0,0,0,.45), 0 0 0 1px rgba(0,0,0,.25);
+  --item-hover:#2D2D48;
+  --selected:  #1A3550;
 }
 
 /* ----------------------------------------------------------------- */
@@ -83,21 +78,24 @@ body{
   background: var(--bg);
   color: var(--text);
   min-height: 100vh;
-  transition: background-color .2s ease, color .2s ease;
+  transition: background-color var(--transition), color var(--transition);
 }
-#main-container{ padding-top: 14px; padding-bottom: 28px; }
+#main-container{ padding-top: 16px; padding-bottom: 32px; }
 
-h1,h2,h3,h4,h5,h6{ font-family:var(--font-ui); margin:0; color:var(--text); }
-h1{font-size:1.5rem; font-weight:700}
-h2{font-size:1.2rem;  font-weight:700}
+h1{font-size:1.45rem; font-weight:700; letter-spacing:-.015em}
+h2{font-size:1.2rem;  font-weight:650; letter-spacing:-.01em}
 h3{font-size:1.05rem; font-weight:600}
-h4{font-size:.95rem;  font-weight:600}
+h4{font-size:.92rem;  font-weight:600}
+h5{font-size:.85rem; font-weight:600; color:var(--muted)}
+h6{font-size:.8rem; font-weight:600; color:var(--muted); letter-spacing:.01em}
+:is(h1,h2,h3){ text-wrap: balance; }
+h1,h2,h3,h4,h5,h6{ font-family:var(--font-ui); margin:0; color:var(--text); }
 
 p,span,div,label,td,th,li,small,.text-muted{ font-family:var(--font-ui); }
 .text-muted{ color: var(--muted) !important; }
 
 /* ----------------------------------------------------------------- */
-/* Bootstrap contextual→palette remap (buttons, badges, text)        */
+/* Bootstrap contextual → palette remap                               */
 /* ----------------------------------------------------------------- */
 .text-primary{ color: var(--pbi-blue)  !important; }
 .text-success{ color: var(--good)      !important; }
@@ -105,49 +103,55 @@ p,span,div,label,td,th,li,small,.text-muted{ font-family:var(--font-ui); }
 .text-danger { color: var(--bad)       !important; }
 .text-info   { color: var(--teal)      !important; }
 
+.btn{
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  font-size: .84rem;
+  padding: .38rem .8rem;
+  transition: background-color var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+.btn:focus-visible{ box-shadow: 0 0 0 3px rgba(17,141,255,.22); outline:none; }
+
 .btn-primary{ background-color:var(--pbi-blue); border-color:var(--pbi-blue); color:#fff; }
 .btn-primary:hover{ background-color:var(--pbi-blue-2); border-color:var(--pbi-blue-2); }
-.btn-secondary{ background-color:#605E5C; border-color:#605E5C; color:#fff; }
-.btn-secondary:hover{ background-color:#4a4847; border-color:#4a4847; }
+.btn-primary:active{ background-color:var(--pbi-blue-3); border-color:var(--pbi-blue-3); }
+.btn-secondary{ background-color:var(--muted); border-color:var(--muted); color:#fff; }
+.btn-secondary:hover{ filter:brightness(.88); }
 .btn-success{ background-color:var(--good); border-color:var(--good); color:#fff; }
 .btn-success:hover{ filter:brightness(.92); }
 .btn-outline-primary{ color:var(--pbi-blue); border-color:var(--pbi-blue); background:transparent; }
-.btn-outline-primary:hover{ background-color:var(--pbi-blue); color:#fff; border-color:var(--pbi-blue); }
+.btn-outline-primary:hover{ background-color:var(--pbi-blue); color:#fff; }
 .btn-outline-secondary{ color:var(--muted); border-color:var(--border); background:var(--card-bg); }
-.btn-outline-secondary:hover{ background-color:var(--item-hover); color:var(--text); border-color:var(--border); }
+.btn-outline-secondary:hover{ background-color:var(--item-hover); color:var(--text); }
 .btn-outline-success{ color:var(--good); border-color:var(--good); background:transparent; }
 .btn-outline-success:hover{ background-color:var(--good); color:#fff; }
+.btn:disabled{ opacity:.5; pointer-events:none; }
 
 /* ----------------------------------------------------------------- */
-/* Header / navbar — flat, no gradient                                */
+/* Navbar                                                             */
 /* ----------------------------------------------------------------- */
 #navbar-container,
 .navbar{
   background: var(--header-bg) !important;
-  box-shadow: none !important;
   border-bottom: 1px solid var(--header-bd) !important;
-  border-left: none !important;
-  border-right: none !important;
-  border-top: none !important;
+  box-shadow: none !important;
+  border-left: none; border-right: none; border-top: none;
 }
-.navbar{ padding: .35rem .75rem !important; min-height: 52px; }
-.navbar-toggler:focus{ box-shadow:none !important; border-color:var(--border); }
+.navbar{ padding: .4rem .75rem !important; min-height: 54px; }
 
-/* brand */
-#brand .fw-bold{ color: var(--text) !important; font-weight:700; font-size:1rem; letter-spacing:-.01em; }
+#brand .fw-bold{ color: var(--text) !important; font-weight:700; font-size:1.02rem; letter-spacing:-.01em; }
 #brand .fw-light{ color: var(--muted) !important; font-weight:500; }
 #brand .fa-leaf{ color: var(--good) !important; }
+#brand .badge{ border:1px solid rgba(46,159,99,.3) !important; }
 
-/* nav links */
 .navbar .nav-custom-link{
-  padding: .42rem .8rem !important;
+  padding: .44rem .85rem !important;
   border-radius: var(--radius-sm) !important;
   font-size: .85rem !important;
   font-weight: 500 !important;
   color: var(--muted) !important;
   background: transparent !important;
-  box-shadow: none !important;
-  transition: background-color .15s ease, color .15s ease !important;
+  transition: background-color var(--transition), color var(--transition) !important;
   border: none !important;
 }
 .navbar .nav-custom-link:hover{
@@ -158,21 +162,15 @@ p,span,div,label,td,th,li,small,.text-muted{ font-family:var(--font-ui); }
   color: var(--pbi-blue) !important;
   background: var(--selected) !important;
   font-weight: 600 !important;
-  box-shadow: inset 0 -2px 0 var(--pbi-blue) !important;
 }
-.navbar .nav-custom-link.active::after{ display:none; }
 .navbar .nav-custom-item{ margin: 0 1px !important; }
 .navbar .fa{ font-size:.92rem; }
 .navbar .btn{ border-radius: var(--radius-sm); font-size:.82rem; }
-.navbar .fa-leaf{ font-size:1.1rem; }
 
-[data-theme="dark"] .navbar .btn-outline-light{
-  color: var(--text); border-color: var(--border);
-}
-
-/* theme toggle switch */
+/* theme toggle */
 .form-check-input:checked{ background-color: var(--pbi-blue) !important; border-color: var(--pbi-blue) !important; }
-.form-check-input{ border-color: var(--border) !important; }
+.form-check-input{ border-color: var(--border) !important; width:2.2em; height:1.1em; cursor:pointer; }
+.form-check-input:focus{ box-shadow: 0 0 0 3px rgba(17,141,255,.15) !important; border-color: var(--pbi-blue) !important; }
 
 /* ----------------------------------------------------------------- */
 /* Cards                                                              */
@@ -186,94 +184,113 @@ p,span,div,label,td,th,li,small,.text-muted{ font-family:var(--font-ui); }
 .card .card-header{
   background: transparent !important;
   border-bottom: 1px solid var(--border-2) !important;
-  padding: .62rem .9rem !important;
+  padding: .7rem 1rem !important;
 }
 .card .card-header h6,
 .card .card-header .fw-bold{
   font-size: .82rem !important;
   font-weight: 600 !important;
   color: var(--text) !important;
-  letter-spacing: .01em;
-  display:flex; align-items:center; gap:.4rem;
+  letter-spacing: .005em;
+  display:flex; align-items:center; gap:.45rem;
 }
-.card .card-header .fa{ color: var(--pbi-blue); font-size:.85rem; }
+.card .card-header .fa{ color: var(--pbi-blue); font-size:.88rem; }
 .card-header .small.text-muted{ font-size:.72rem; }
-.card .card-body{ padding: .85rem .9rem; }
+.card .card-body{ padding: .9rem 1rem; }
 
-/* KPI cards — Power BI "card" visual */
+/* KPI cards — accent top border */
 .kpi-card{
   border: 1px solid var(--border) !important;
   border-radius: var(--radius) !important;
   box-shadow: var(--shadow) !important;
   background: var(--card-bg) !important;
   overflow: hidden;
+  transition: box-shadow var(--transition);
 }
+.kpi-card:hover{ box-shadow: var(--shadow-lg) !important; }
 .kpi-card .kpi-accent{ height: 3px; width: 100%; }
-.kpi-body{ padding: .78rem .95rem .82rem !important; }
-.kpi-head{ display:flex; align-items:center; gap:.5rem; margin-bottom:.3rem; }
-.kpi-card .kpi-icon{ font-size:.92rem; }
+.kpi-body{ padding: .85rem 1rem .9rem !important; }
+.kpi-head{ display:flex; align-items:center; gap:.5rem; margin-bottom:.35rem; }
+.kpi-card .kpi-icon{ font-size:.95rem; }
 .kpi-label{
-  font-size:.72rem; font-weight:600; color:var(--muted);
-  letter-spacing:.01em; text-transform:none;
+  font-size:.73rem; font-weight:600; color:var(--muted);
+  letter-spacing:.005em; text-transform:none;
 }
 .kpi-value{
-  font-size:1.66rem; font-weight:600; line-height:1.15;
-  color:var(--text); letter-spacing:-.01em;
+  font-size:1.7rem; font-weight:650; line-height:1.2;
+  color:var(--text); letter-spacing:-.015em;
 }
-.kpi-sub{ font-size:.77rem; color:var(--muted); margin-top:.18rem; }
-
-/* keep legacy class names quiet */
-.card.kpi-compact{ border-left:none !important; }
+.kpi-sub{ font-size:.78rem; color:var(--muted); margin-top:.2rem; }
 
 /* ----------------------------------------------------------------- */
-/* Filter / slicer strip                                              */
+/* Filter strip                                                       */
 /* ----------------------------------------------------------------- */
 #filtres-year-card, #filtres-card{
   box-shadow: var(--shadow) !important;
   background: var(--card-bg) !important;
 }
 #filtres-year-card .card-body,
-#filtres-card .card-body{ padding: .62rem .9rem; }
+#filtres-card .card-body{ padding: .7rem 1rem; }
 #filtres-card label.fw-semibold{
   font-size:.74rem; font-weight:600; color:var(--muted);
-  letter-spacing:.02em; text-transform:uppercase; margin-bottom:.28rem;
+  letter-spacing:.015em; text-transform:none; margin-bottom:.3rem;
 }
 #filtres-card label .fa{ color: var(--pbi-blue); }
 
-/* Range slider — Segoe-ish track + blue handles */
-.rc-slider{
-  height: 6px; border-radius: 3px;
-  background: var(--grid);
-  margin: .9rem 6px 1.1rem;
-}
+/* Range slider */
+.rc-slider{ height: 6px; border-radius: 3px; background: var(--grid); margin: .9rem 6px 1.1rem; }
 .rc-slider-track{ background: var(--pbi-blue); }
 .rc-slider-handle{
-  border: 2px solid var(--pbi-blue);
-  background: #fff;
-  width: 16px; height: 16px;
-  box-shadow: 0 1px 3px rgba(0,0,0,.25);
-  margin-top: -5px !important;
+  border: 2px solid var(--pbi-blue); background: #fff;
+  width: 18px; height: 18px; margin-top: -6px !important;
+  box-shadow: 0 1px 4px rgba(0,0,0,.2);
+  transition: box-shadow var(--transition), transform var(--transition);
 }
-.rc-slider-handle:active, .rc-slider-handle:focus{ border-color: var(--pbi-blue-2); box-shadow:0 0 0 4px rgba(17,141,255,.18); }
+.rc-slider-handle:hover{ transform: scale(1.12); }
+.rc-slider-handle:active, .rc-slider-handle:focus{
+  border-color: var(--pbi-blue-2);
+  box-shadow: 0 0 0 4px rgba(17,141,255,.2);
+}
 .rc-slider-mark-text{ font-size:.74rem; color:var(--faint); font-family:var(--font-ui); margin-top:6px; }
-.rc-slider-dot{ border-color: var(--border); background:#fff; }
+.rc-slider-dot{ border-color: var(--border); background:var(--card-bg); }
 
 /* dcc.Dropdown */
-.Select-menu-outer, .Select-control{ border-radius: var(--radius-sm) !important; }
-.Select-control, .Select-multi-value-wrapper{ min-height: 36px; background: var(--card-bg); }
-.VirtualizedSelectOption{ font-size:.85rem; }
-.Select-value, .Select-input{ font-family:var(--font-ui); }
+.Select-control{
+  border-radius: var(--radius-sm) !important;
+  min-height: 36px;
+  background: var(--card-bg);
+  border-color: var(--border) !important;
+}
+.Select-control:hover{ border-color: var(--pbi-blue) !important; }
+.Select-menu-outer{ border-radius: var(--radius-sm) !important; border-color: var(--border) !important; box-shadow: var(--shadow-lg) !important; }
+.Select-option{ font-size:.85rem; }
+.Select-option.is-focused{ background: var(--item-hover); }
+.Select-option.is-selected{ background: var(--selected); color: var(--pbi-blue); }
+.Select-value, .Select-input{ font-family:var(--font-ui); font-size:.85rem; line-height:1.4; }
 .Select-placeholder{ color: var(--faint); }
-[data-theme="dark"] .Select-control *,
-[data-theme="dark"] .Select-placeholder{ background:#1f1e1d !important; color:var(--text) !important; }
+.Select-clear-zone{ color: var(--faint); }
+.Select-clear-zone:hover{ color: var(--bad); }
+.Select-arrow-zone{ color: var(--muted); }
+.is-open > .Select-control{ border-color: var(--pbi-blue) !important; box-shadow: 0 0 0 3px rgba(17,141,255,.12); }
+[data-theme="dark"] .Select-control,
+[data-theme="dark"] .Select-menu-outer{ background: var(--card-bg) !important; }
+[data-theme="dark"] .Select-option{ color: var(--text); }
+[data-theme="dark"] .Select-option.is-focused{ background: var(--item-hover) !important; }
+[data-theme="dark"] .Select-option.is-selected{ background: var(--selected) !important; }
+
+/* RadioItems (scenario selector) */
+.dbc-radio-items label{
+  transition: background-color var(--transition), border-color var(--transition) !important;
+}
 
 /* ----------------------------------------------------------------- */
-/* Buttons / groups                                                   */
+/* Button groups / presets                                            */
 /* ----------------------------------------------------------------- */
-.btn-group{ gap:.3rem; }
-.btn-group .btn{ border-radius: var(--radius-sm) !important; padding:.32rem .7rem; font-size:.82rem; min-width:64px; }
-.btn-group .btn:focus{ box-shadow:0 0 0 .12rem rgba(17,141,255,.18); }
-#btn-pdf{ transition: transform .12s ease; }
+.btn-group{ gap:.35rem; }
+.btn-group .btn{ border-radius: var(--radius-sm) !important; padding:.35rem .75rem; font-size:.83rem; }
+.btn-group .btn:focus-visible{ box-shadow:0 0 0 3px rgba(17,141,255,.22); }
+.btn-group .btn-outline-primary:focus-visible{ box-shadow:0 0 0 3px rgba(17,141,255,.22); }
+#btn-pdf{ transition: transform var(--transition); }
 #btn-pdf:active{ transform: translateY(1px); }
 
 /* ----------------------------------------------------------------- */
@@ -284,7 +301,7 @@ p,span,div,label,td,th,li,small,.text-muted{ font-family:var(--font-ui); }
 .modebar{ display:none !important; }
 
 /* ----------------------------------------------------------------- */
-/* dash_table — Power BI grid                                         */
+/* dash_table                                                         */
 /* ----------------------------------------------------------------- */
 .dash-spreadsheet{ font-family: var(--font-ui) !important; font-size:12.5px; }
 .dash-spreadsheet table{ border-collapse: collapse; }
@@ -295,9 +312,9 @@ p,span,div,label,td,th,li,small,.text-muted{ font-family:var(--font-ui); }
   font-weight: 600 !important;
   font-size: 12px !important;
   border-bottom: 1px solid var(--border) !important;
-  padding: 7px 10px !important;
+  padding: 8px 10px !important;
 }
-.dash-spreadsheet td.unfreeze{ padding: 6px 10px !important; }
+.dash-spreadsheet td.unfreeze{ padding: 7px 10px !important; }
 .dash-spreadsheet .dash-cell{ border-color: var(--border-2) !important; }
 .dash-spreadsheet tr:hover{ background: var(--item-hover); }
 .dash-table-container .previous-next-container{ font-size:12px; }
@@ -314,21 +331,22 @@ p,span,div,label,td,th,li,small,.text-muted{ font-family:var(--font-ui); }
 /* ----------------------------------------------------------------- */
 /* Misc                                                              */
 /* ----------------------------------------------------------------- */
-hr{ border-color: var(--border-2); opacity:1; }
+hr{ border-color: var(--border-2); opacity:1; margin:1.2rem 0; }
 .shadow-sm{ box-shadow: var(--shadow) !important; }
-/* badge accent */
-.badge[style*="2ecc71"], #brand .badge{ border:1px solid rgba(46,159,99,.35) !important; }
 
 /* ----------------------------------------------------------------- */
 /* Responsive                                                        */
 /* ----------------------------------------------------------------- */
 @media (max-width: 991px){
   .navbar .nav-custom-link{ padding:.55rem .9rem !important; }
+  #main-container{ padding-top: 12px; }
 }
 @media (max-width: 768px){
   .navbar .d-none.d-md-inline{ display:none !important; }
   #filtres-card .row > [class*="col-"]{ margin-bottom:.6rem; }
+  #main-container{ padding-top: 8px; padding-bottom: 20px; }
+  .kpi-value{ font-size:1.35rem; }
 }
 
 /* Smooth theme transition */
-*{ transition: background-color .2s ease, color .2s ease, border-color .2s ease; }
+*{ transition: background-color var(--transition), color var(--transition), border-color var(--transition); }
