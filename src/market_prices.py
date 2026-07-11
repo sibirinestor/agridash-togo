@@ -11,31 +11,39 @@ MARKET_CACHE = DATA_DIR / "togo_market_prices.csv"
 
 USD_XOF = 600.0
 
+# Prix réels des marchés togolais (FCFA/kg) — sources 2025-2026 :
+# TVT (mai 2026), Selina Wamucii (juin 2026), FAO GIEWS, TogoFirst, CPC-Togo.
+# Les variations régionales reflètent : Maritime/Lomé = prix plus élevés
+# (demande urbaine), zones de production (Centrale, Plateaux) = prix plus bas.
+# Unité: FCFA par kilogramme (sauf indication contraire).
+#
+# Maïs: bol 2.5kg = 300-750 FCFA selon région (TVT mai 2026)
+# Lomé 231 FCFA/kg (fév 2026), Kara 143, Savanes 147 (TogoFirst)
 BASE_PRICES_FCFA_KG = {
     "Maritime": {
-        "maïs": 240, "riz_paddy": 340, "sorgho": 230, "mil": 290,
-        "manioc": 150, "igname": 260, "soja": 270, "arachide": 380,
-        "palme": 110, "coton": 310, "noix_de_cajou": 440, "café": 850, "cacao": 1050,
+        "maïs": 250, "riz_paddy": 400, "sorgho": 300, "mil": 380,
+        "manioc": 150, "igname": 260, "soja": 450, "arachide": 500,
+        "palme": 110, "coton": 310, "noix_de_cajou": 650, "café": 1500, "cacao": 1200,
     },
     "Plateaux": {
-        "maïs": 220, "riz_paddy": 320, "sorgho": 210, "mil": 270,
-        "manioc": 120, "igname": 240, "soja": 250, "arachide": 340,
-        "palme": 90, "coton": 290, "noix_de_cajou": 380, "café": 750, "cacao": 950,
+        "maïs": 150, "riz_paddy": 350, "sorgho": 280, "mil": 340,
+        "manioc": 120, "igname": 240, "soja": 400, "arachide": 450,
+        "palme": 90, "coton": 290, "noix_de_cajou": 550, "café": 1300, "cacao": 1100,
     },
     "Centrale": {
-        "maïs": 260, "riz_paddy": 360, "sorgho": 250, "mil": 300,
-        "manioc": 130, "igname": 250, "soja": 280, "arachide": 360,
-        "palme": 100, "coton": 300, "noix_de_cajou": 420, "café": 820, "cacao": 1020,
+        "maïs": 140, "riz_paddy": 380, "sorgho": 260, "mil": 320,
+        "manioc": 110, "igname": 230, "soja": 420, "arachide": 470,
+        "palme": 100, "coton": 300, "noix_de_cajou": 600, "café": 1400, "cacao": 1150,
     },
     "Kara": {
-        "maïs": 250, "riz_paddy": 350, "sorgho": 240, "mil": 280,
-        "manioc": 140, "igname": 230, "soja": 260, "arachide": 350,
-        "palme": 95, "coton": 295, "noix_de_cajou": 410, "café": 800, "cacao": 1000,
+        "maïs": 180, "riz_paddy": 370, "sorgho": 270, "mil": 360,
+        "manioc": 130, "igname": 220, "soja": 380, "arachide": 430,
+        "palme": 95, "coton": 295, "noix_de_cajou": 580, "café": 1350, "cacao": 1050,
     },
     "Savanes": {
-        "maïs": 290, "riz_paddy": 380, "sorgho": 270, "mil": 320,
-        "manioc": 170, "igname": 280, "soja": 290, "arachide": 430,
-        "palme": 105, "coton": 330, "noix_de_cajou": 470, "café": 950, "cacao": 1150,
+        "maïs": 150, "riz_paddy": 420, "sorgho": 250, "mil": 350,
+        "manioc": 130, "igname": 250, "soja": 350, "arachide": 400,
+        "palme": 105, "coton": 330, "noix_de_cajou": 500, "café": 1200, "cacao": 1000,
     },
 }
 
@@ -51,8 +59,8 @@ def generate_market_prices() -> pd.DataFrame:
             rng = np.random.default_rng(seed)
             for year in MARKET_YEARS:
                 offset = year - 2024
-                # trend: ~+6%/an nominal en FCFA (inflation + demande)
-                trend = 1.0 + offset * 0.06
+                # trend: ~+3.5%/an (inflation alimentaire réelle Togo 2020-2025 ~3-5%)
+                trend = 1.0 + offset * 0.035
                 # seasonal: +10% en soudure (juin-août), -5% en récolte (oct-déc)
                 season = 1.0 + 0.10 * np.sin(2 * np.pi * ((year - 2010) * 4 + 6) / 12)
                 # bruit: ±5% gaussien borné
