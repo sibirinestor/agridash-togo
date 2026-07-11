@@ -414,21 +414,31 @@ def section(title, graph_id, col_width=6, height=None):
 # TAB: VUE D'ENSEMBLE
 # ============================================================
 def render_dashboard_tab(years, crops, indicator, t):
+    y_max_indicator = years[1]
+    ind_labels = {
+        "inflation": "Inflation (%)", "gdp": "PIB ($)",
+        "yield_t_ha": "Rendement (t/ha)", "production_t": "Production (t)",
+        "area_ha": "Superficie (ha)", "price_usd_t": "Prix ($/t)",
+        "precip_mm": "Précipitations (mm)", "temp_c": "Température (°C)",
+        "fert_kg_ha": "Engrais (kg/ha)", "exchange_rate": "Taux de Change (XAF/$)",
+        "gdp_deflator": "Déflateur PIB (%)", "food_index": "Indice Prod. Alimentaire",
+    }
+    ind_label = ind_labels.get(indicator, indicator.replace("_", " ").title())
     return dbc.Row([
         dbc.Col([
             dbc.Row([
-                section("Évolution des Rendements", "dash-yield", 6),
-                section("Production par Culture", "dash-prod", 6),
+                section("Rendement (t/ha)", "dash-yield", 6),
+                section("Production (tonnes)", "dash-prod", 6),
             ], className="mb-4 g-3"),
             dbc.Row([
-                section("Production par Catégorie", "dash-cat-pie", 5),
-                section(f"{indicator.replace('_',' ').title()} dans le temps", "dash-indicator", 7),
+                section(f"Répartition {y_max_indicator}", "dash-cat-pie", 5),
+                section(ind_label, "dash-indicator", 7),
             ], className="mb-4 g-3"),
         ], width=9),
         dbc.Col([
-            section(f"Score de Risque", "dash-gauge", 12, "220px"),
+            section("Score de Risque Global", "dash-gauge", 12, "220px"),
             dbc.Card([
-                dbc.CardHeader(html.H6("Production 2023 par Culture", className="fw-bold mb-0")),
+                dbc.CardHeader(html.H6(f"Production {y_max_indicator}", className="fw-bold mb-0")),
                 dbc.CardBody(dcc.Graph(id="dash-prod-bar", config={"displayModeBar": False})),
             ], className="shadow-sm mb-4"),
         ], width=3),
@@ -458,17 +468,17 @@ def render_crops_tab(years, crops, t):
     return dbc.Row([
         dbc.Col([
             dbc.Row([
-                section("Rendement (séries)", "crops-yield", 6),
-                section("Production", "crops-prod", 6),
+                section("Rendement (t/ha)", "crops-yield", 6),
+                section("Production (tonnes)", "crops-prod", 6),
             ], className="mb-4 g-3"),
             dbc.Row([
-                section("Superficie Récoltée", "crops-area", 6),
+                section("Superficie (ha)", "crops-area", 6),
                 section("Prix ($/t)", "crops-price", 6),
             ], className="mb-4 g-3"),
         ], width=8),
         dbc.Col([
             dbc.Card([
-                dbc.CardHeader(html.H6("Production 2023", className="fw-bold mb-0")),
+                dbc.CardHeader(html.H6(f"Production {last_year}", className="fw-bold mb-0")),
                 dbc.CardBody(dash_table.DataTable(
                     data=prod_df.to_dict("records"),
                     columns=[{"name": c, "id": c} for c in prod_df.columns],
@@ -501,11 +511,11 @@ def render_macro_tab(years, t):
     return dbc.Row([
         dbc.Col([
             dbc.Row([
-                section("PIB vs Inflation", "macro-dual", 6),
-                section("Comparaison Régionale", "macro-wa", 6),
+                section("PIB et Inflation", "macro-dual", 6),
+                section("Inflation en Afrique de l'Ouest", "macro-wa", 6),
             ], className="mb-4 g-3"),
             dbc.Row([
-                section("Distribution", "macro-dist", 12),
+                section("Distribution des Valeurs", "macro-dist", 12),
             ], className="g-3"),
         ], width=9),
         dbc.Col([
@@ -723,12 +733,12 @@ def render_climate_tab(years, t):
     return dbc.Row([
         dbc.Col([
             dbc.Row([
-                section("Précipitations Annuelles (NASA POWER)", "climate-precip", 6),
-                section("Température Annuelle Moyenne", "climate-temp", 6),
+                section("Précipitations Annuelles (mm)", "climate-precip", 6),
+                section("Température Annuelle (°C)", "climate-temp", 6),
             ], className="mb-4 g-3"),
             dbc.Row([
                 section("Précipitations par Région", "climate-region-precip", 6),
-                section("Température par Région", "climate-region-temp", 6),
+                section("Température par Région (°C)", "climate-region-temp", 6),
             ], className="mb-4 g-3"),
         ], width=9),
         dbc.Col([
@@ -737,7 +747,7 @@ def render_climate_tab(years, t):
                 dbc.CardBody(id="climate-summary"),
             ], className="shadow-sm mb-4"),
             dbc.Card([
-                dbc.CardHeader(html.H6("Corr. Climat-Rendement", className="fw-bold mb-0")),
+                dbc.CardHeader(html.H6("Corrélation Climat/Rendement", className="fw-bold mb-0")),
                 dbc.CardBody(dcc.Graph(id="climate-corr", config={"displayModeBar": False})),
             ], className="shadow-sm"),
         ], width=3),
@@ -889,8 +899,8 @@ def render_markets_tab(years, crops, t):
                 section("Prix par Région (FCFA/kg)", "mkts-heatmap", 12, "500px"),
             ], className="mb-4 g-3"),
             dbc.Row([
-                section("Évolution des Prix (FCFA/kg)", "mkts-ts", 6),
-                section("Spread Prix par Région", "mkts-bar", 6),
+                section("Évolution des Prix", "mkts-ts", 6),
+                section("Écart Prix par Région", "mkts-bar", 6),
             ], className="mb-4 g-3"),
         ], width=9),
         dbc.Col([
@@ -945,8 +955,8 @@ def render_risks_tab(years, t):
     return dbc.Row([
         dbc.Col([
             dbc.Row([
-                section("Score de Risque (série)", "risk-ts", 6),
-                section("Répartition des Niveaux", "risk-pie", 6),
+                section("Évolution du Score de Risque", "risk-ts", 6),
+                section("Répartition par Niveau", "risk-pie", 6),
             ], className="mb-4 g-3"),
         ], width=8),
         dbc.Col([
