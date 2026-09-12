@@ -7,6 +7,7 @@ __pycache__/
 dist/
 build/
 .DS_Store
+.idea/
 
 # Generated artifacts
 scripts/shots/
