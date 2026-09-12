@@ -434,25 +434,28 @@ def _sync_scenario(v): return v or "modéré"
           Input("crop-dropdown", "value"), Input("indicator-dropdown", "value"),
           Input("store-scenario", "data"))
 def render_tab(tab, theme, years, crops, indicator, scen):
+    # Rendu paresseux : seul l'onglet actif est monté. Les callbacks des
+    # graphiques des onglets masqués ne se déclenchent donc pas à chaque
+    # filtre — c'est ce qui rend le dashboard réactif (~4 figures au lieu de ~25).
     t = THEMES.get(theme, THEMES["light"])
     sy = years or [2010, 2024]
     si = indicator or "yield_t_ha"
     sc_crops = crops if crops else ["maïs", "soja", "coton"]
-    panels = {
-        "tab-dash":    render_dashboard_tab(sy, sc_crops, si, t),
-        "tab-crops":   render_crops_tab(sy, crops, t),
-        "tab-macro":   render_macro_tab(sy, t),
-        "tab-map":     render_map_tab(t),
-        "tab-climate": render_climate_tab(sy, t),
-        "tab-forecast": render_forecast_tab(sy, sc_crops, t, scen or "modéré"),
-        "tab-markets": render_markets_tab(sy, sc_crops, t),
-        "tab-risks":   render_risks_tab(sy, t),
-    }
-    return html.Div([
-        html.Div(panels[tid], id=f"panel-{tid}",
-                 style={"display": "block" if tid == tab else "none"})
-        for tid in TAB_IDS
-    ])
+    if tab == "tab-crops":
+        return render_crops_tab(sy, crops, t)
+    if tab == "tab-macro":
+        return render_macro_tab(sy, t)
+    if tab == "tab-map":
+        return render_map_tab(t)
+    if tab == "tab-climate":
+        return render_climate_tab(sy, t)
+    if tab == "tab-forecast":
+        return render_forecast_tab(sy, sc_crops, t, scen or "modéré")
+    if tab == "tab-markets":
+        return render_markets_tab(sy, sc_crops, t)
+    if tab == "tab-risks":
+        return render_risks_tab(sy, t)
+    return render_dashboard_tab(sy, sc_crops, si, t)
 
 
 def section(title, graph_id, col_width=6, height=None):

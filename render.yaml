@@ -3,7 +3,7 @@ services:
     name: agridash-togo
     runtime: python
     buildCommand: pip install --upgrade pip && pip install -r requirements.txt
-    startCommand: gunicorn dashboard.app:server --bind 0.0.0.0:$PORT --timeout 120 --workers 2
+    startCommand: gunicorn dashboard.app:server --bind 0.0.0.0:$PORT --timeout 120 --workers 2 --preload
     envVars:
       - key: DASH_USER
         value: admin

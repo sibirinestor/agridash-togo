@@ -10,10 +10,15 @@ os.environ.setdefault("MPLCONFIGDIR", str(Path(tempfile.gettempdir()) / "matplot
 
 logger = logging.getLogger(__name__)
 
-try:
-    from prophet import Prophet
-except ImportError:
-    Prophet = None
+def _get_prophet():
+    """Import paresseux : Prophet (~lourd) n'est chargé que si le cache
+    prévisions est absent et qu'un réentraînement est nécessaire."""
+    try:
+        from prophet import Prophet
+        return Prophet
+    except ImportError:
+        return None
+
 
 from src.agriculture_data import get_togo_agriculture_data, CROP_PARAMS
 from src.climate_data import get_togo_climate_data
@@ -26,6 +31,7 @@ CONFIDENCE_LEVEL = 1.96
 
 
 def _train_prophet(y: np.ndarray, years: np.ndarray):
+    Prophet = _get_prophet()
     if Prophet is None:
         raise RuntimeError("Prophet is not installed")
     df = pd.DataFrame({"ds": pd.to_datetime(years, format="%Y"), "y": y})
@@ -42,7 +48,7 @@ def _train_prophet(y: np.ndarray, years: np.ndarray):
     return m
 
 
-def _predict_prophet(m: Prophet, years: list) -> pd.DataFrame:
+def _predict_prophet(m, years: list) -> pd.DataFrame:
     future = pd.DataFrame({"ds": pd.to_datetime(years, format="%Y")})
     fcst = m.predict(future)
     return fcst
@@ -69,7 +75,7 @@ def _predict_trend(y: np.ndarray, years: np.ndarray, future_years: list) -> pd.D
 
 
 def _forecast_yields(yields: np.ndarray, years: np.ndarray) -> pd.DataFrame:
-    if Prophet is not None:
+    if _get_prophet() is not None:
         try:
             model = _train_prophet(yields, years)
             return _predict_prophet(model, FORECAST_YEARS)
