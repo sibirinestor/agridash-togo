@@ -1,3 +1,13 @@
+---
+title: AgriDash Togo
+emoji: 🌾
+colorFrom: green
+colorTo: yellow
+sdk: docker
+pinned: false
+app_port: 7860
+---
+
 # AgriDash Togo
 
 Documentation complete du projet d'optimisation et de pilotage des chaines de valeur agricoles au Togo.

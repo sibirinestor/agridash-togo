@@ -247,9 +247,7 @@ app.layout = html.Div([
     dcc.Store(id="theme-store", data="light"),
     dcc.Store(id="active-tab", data="tab-dash"),
     dcc.Store(id="selected-region", data=""),
-    dcc.Store(id="store-years"),
-    dcc.Store(id="store-crops"),
-    dcc.Store(id="store-indicator"),
+    dcc.Store(id="store-scenario", data="modéré"),
     dcc.Download(id="download-pdf"),
 ], id="app-container", **{'data-theme': 'light'})
 
@@ -301,11 +299,16 @@ def filter_crops_by_cat(cats):
 # ============================================================
 # KPI CALLBACK
 # ============================================================
+MACRO_INDICATORS = {"inflation", "gdp", "precip_mm", "temp_c",
+                    "fert_kg_ha", "exchange_rate", "gdp_deflator", "food_index"}
+
 @callback(Output("kpi-row", "children"), Input("year-slider", "value"),
           Input("cat-dropdown", "value"), Input("crop-dropdown", "value"),
-          Input("theme-store", "data"))
-def update_kpis(years, cats, crops, theme):
+          Input("indicator-dropdown", "value"), Input("theme-store", "data"))
+def update_kpis(years, cats, crops, indicator, theme):
     y_min, y_max = years
+    agri_year_max = int(agri_data["Year"].max())
+    y_last = min(y_max, agri_year_max)
 
     adf = agri_data[(agri_data["Year"] >= y_min) & (agri_data["Year"] <= y_max)].copy()
     if cats:
@@ -313,7 +316,7 @@ def update_kpis(years, cats, crops, theme):
     if crops:
         adf = adf[adf["crop"].isin(crops)]
 
-    adf_lastyear = adf[adf["Year"] == y_max]
+    adf_lastyear = adf[adf["Year"] == y_last]
     prod_total = adf_lastyear["production_t"].sum()
     food_total = adf_lastyear[adf_lastyear["staple"] == True]["production_t"].sum()
 
@@ -331,6 +334,13 @@ def update_kpis(years, cats, crops, theme):
         rc, rs = "N/D", 0
     rcol = "success" if rc == "Faible" else "warning" if rc in ["Modéré","Élevé"] else "danger"
     ricon = "fa-check-circle" if rc == "Faible" else "fa-exclamation-triangle" if rc=="Modéré" else "fa-times-circle"
+
+    cagr = 0
+    if len(adf):
+        prod_end = adf[adf["Year"]==y_last]["production_t"].sum()
+        prod_start = adf[adf["Year"]==y_min]["production_t"].sum()
+        if prod_end > 0 and prod_start > 0:
+            cagr = ((prod_end / prod_start) ** (1/max(y_last-y_min, 1)) - 1) * 100
 
     def kpi_card(icon, label, value, subtitle, color, _border_color):
         return dbc.Col(dbc.Card([
@@ -350,16 +360,59 @@ def update_kpis(years, cats, crops, theme):
         if v >= 1e3: return f"{v/1e3:.0f}k"
         return f"{v:.0f}"
 
+    if indicator in MACRO_INDICATORS:
+        mdf = merged[(merged["Year"] >= y_min) & (merged["Year"] <= y_max)]
+        last_m = mdf.iloc[-1] if len(mdf) else None
+        ind_labels = {
+            "inflation": "Inflation (%)", "gdp": "PIB ($)",
+            "precip_mm": "Précipitations (mm)", "temp_c": "Température (°C)",
+            "fert_kg_ha": "Engrais (kg/ha)", "exchange_rate": "Taux de Change (XAF/$)",
+            "gdp_deflator": "Déflateur PIB (%)", "food_index": "Indice Prod. Alimentaire",
+        }
+        last_ind = last_m[indicator] if last_m is not None and indicator in last_m.index else np.nan
+        last_inf = last_m["inflation"] if last_m is not None else np.nan
+        last_gdp = last_m["gdp"] if last_m is not None else np.nan
+        ind_year = int(last_m["Year"]) if last_m is not None else y_last
+
+        def _fmt(v, pct=False, div=1.0):
+            if v is None or (isinstance(v, float) and np.isnan(v)):
+                return "N/D"
+            if pct: return f"{v:+.1f}%"
+            if div != 1.0: return f"{v/div:.1f}"
+            return f"{v:,.0f}"
+
+        ind_val = _fmt(last_ind)
+        if indicator == "gdp":
+            ind_val = _fmt(last_ind, div=1e9)
+        elif indicator == "inflation":
+            ind_val = _fmt(last_ind, pct=True)
+        elif indicator in ("fert_kg_ha", "gdp_deflator", "food_index"):
+            ind_val = _fmt(last_ind)
+        else:
+            ind_val = _fmt(last_ind, pct=False)
+
+        return [
+            kpi_card("fa-chart-line", ind_labels.get(indicator, indicator),
+                     ind_val, f"{ind_labels.get(indicator, indicator)} ({ind_year})",
+                     COLORS["primary"], COLORS["primary"]),
+            kpi_card("fa-chart-line", "Inflation", _fmt(last_inf, pct=True),
+                     f"% ({ind_year})", COLORS["danger"], COLORS["danger"]),
+            kpi_card("fa-dollar-sign", "PIB", _fmt(last_gdp, div=1e9),
+                     f"milliards $ ({ind_year})", COLORS["success"], COLORS["success"]),
+            kpi_card(ricon, "Niveau de Risque", rc,
+                     f"Score global: {rs:.3f} · TCAM: {cagr:+.1f}%",
+                     COLORS[rcol], COLORS[rcol]),
+        ]
+
     n_crops = adf_lastyear["crop"].nunique() if len(adf_lastyear) else 0
-    cagr = ((adf[adf["Year"]==y_max]["production_t"].sum() / max(adf[adf["Year"]==y_min]["production_t"].sum(), 1)) ** (1/max(y_max-y_min, 1)) - 1) * 100 if len(adf) and adf[adf["Year"]==y_max]["production_t"].sum() > 0 and adf[adf["Year"]==y_min]["production_t"].sum() > 0 else 0
 
     export_subtitle = f"{', '.join(sorted(export_crops['crop'].unique()))}" if len(export_crops) else "—"
     return [
         kpi_card("fa-tractor", "Production Totale", fmt_t(prod_total),
-                 f"tonnes ({y_max}) · {n_crops} culture{'s' if n_crops>1 else ''}",
+                 f"tonnes ({y_last}) · {n_crops} culture{'s' if n_crops>1 else ''}",
                  COLORS["primary"], COLORS["primary"]),
         kpi_card("fa-apple-alt", "Production Alimentaire", fmt_t(food_total),
-                 f"tonnes ({y_max}) · cultures de base",
+                 f"tonnes ({y_last}) · cultures de base",
                  COLORS["success"], COLORS["success"]),
         kpi_card("fa-dollar-sign", "Valeur Exportation", f"{export_val:.0f}M$",
                  export_subtitle,
@@ -373,33 +426,33 @@ def update_kpis(years, cats, crops, theme):
 # ============================================================
 # TAB RENDERER
 # ============================================================
-@callback(Output("store-years", "data"), Input("year-slider", "value"))
-def _sync_years(v): return v
-
-@callback(Output("store-crops", "data"), Input("crop-dropdown", "value"))
-def _sync_crops(v): return v
-
-@callback(Output("store-indicator", "data"), Input("indicator-dropdown", "value"))
-def _sync_indicator(v): return v
-
-from dash import no_update as _nu
-years_cur = _nu
-crops_cur = _nu
-indicator_cur = _nu
+@callback(Output("store-scenario", "data"), Input("scenario-select", "value"))
+def _sync_scenario(v): return v or "modéré"
 
 @callback(Output("tab-content", "children"), Input("active-tab", "data"),
-          Input("theme-store", "data"), Input("store-years", "data"),
-          Input("store-crops", "data"), Input("store-indicator", "data"))
-def render_tab(tab, theme, sy, sc, si):
+          Input("theme-store", "data"), Input("year-slider", "value"),
+          Input("crop-dropdown", "value"), Input("indicator-dropdown", "value"),
+          Input("store-scenario", "data"))
+def render_tab(tab, theme, years, crops, indicator, scen):
     t = THEMES.get(theme, THEMES["light"])
-    if tab == "tab-crops":    return render_crops_tab(sy or [2010, 2024], sc or [], t)
-    if tab == "tab-macro":    return render_macro_tab(sy or [2010, 2024], t)
-    if tab == "tab-map":      return render_map_tab(t)
-    if tab == "tab-climate":  return render_climate_tab(sy or [2010, 2024], t)
-    if tab == "tab-forecast": return render_forecast_tab(sy or [2010, 2024], sc or ["maïs", "soja", "coton"], t)
-    if tab == "tab-markets":  return render_markets_tab(sy or [2010, 2024], sc or ["maïs"], t)
-    if tab == "tab-risks":    return render_risks_tab(sy or [2010, 2024], t)
-    return render_dashboard_tab(sy or [2010, 2024], sc or ["maïs", "soja", "coton"], si or "yield_t_ha", t)
+    sy = years or [2010, 2024]
+    si = indicator or "yield_t_ha"
+    sc_crops = crops if crops else ["maïs", "soja", "coton"]
+    panels = {
+        "tab-dash":    render_dashboard_tab(sy, sc_crops, si, t),
+        "tab-crops":   render_crops_tab(sy, crops, t),
+        "tab-macro":   render_macro_tab(sy, t),
+        "tab-map":     render_map_tab(t),
+        "tab-climate": render_climate_tab(sy, t),
+        "tab-forecast": render_forecast_tab(sy, sc_crops, t, scen or "modéré"),
+        "tab-markets": render_markets_tab(sy, sc_crops, t),
+        "tab-risks":   render_risks_tab(sy, t),
+    }
+    return html.Div([
+        html.Div(panels[tid], id=f"panel-{tid}",
+                 style={"display": "block" if tid == tab else "none"})
+        for tid in TAB_IDS
+    ])
 
 
 def section(title, graph_id, col_width=6, height=None):
@@ -414,7 +467,7 @@ def section(title, graph_id, col_width=6, height=None):
 # TAB: VUE D'ENSEMBLE
 # ============================================================
 def render_dashboard_tab(years, crops, indicator, t):
-    y_max_indicator = years[1]
+    y_max_indicator = min(years[1], int(agri_data["Year"].max()))
     ind_labels = {
         "inflation": "Inflation (%)", "gdp": "PIB ($)",
         "yield_t_ha": "Rendement (t/ha)", "production_t": "Production (t)",
@@ -449,15 +502,14 @@ def render_dashboard_tab(years, crops, indicator, t):
 # TAB: CULTURES (détaillé)
 # ============================================================
 def render_crops_tab(years, crops, t):
-    if not crops:
-        crops = ["maïs"]
+    sel_crops = [c for c in ALL_CROP_NAMES if c in (crops or [])] or ALL_CROP_NAMES
     last_year = int(agri_data["Year"].max())
     last_data = agri_data[agri_data["Year"] == last_year].groupby("crop")["production_t"].sum().to_dict()
     prod_df = pd.DataFrame([
         {"Culture": c, "Catégorie": ALL_CROPS[c]["category"],
          "Aliment de base": "Oui" if ALL_CROPS[c]["staple"] else "Non",
          f"Production {last_year} (t)": f"{int(last_data.get(c, 0)):,}"}
-        for c in ALL_CROP_NAMES
+        for c in sel_crops
     ])
     pia_rows = []
     for k, v in PIA_TRANSFORMATION_POTENTIAL.items():
@@ -695,21 +747,23 @@ def _region_detail_card(region_name, sel, crops):
     Input("selected-region", "data"),
 )
 def highlight_region(clickData, years, current_selection):
-    rdf = togo_map.get_region_production_data(agri_data, years[1])
-    ctx_trigger = dash.callback_context.triggered[0]["prop_id"] if dash.callback_context.triggered else ""
+    map_year = min(years[1], int(agri_data["Year"].max()))
+    rdf = togo_map.get_region_production_data(agri_data, map_year)
 
-    if "map-chart.clickData" in ctx_trigger and clickData:
+    if ctx.triggered_id == "map-chart" and clickData:
         try:
             pt = clickData.get("points", [])[0]
-            customdata = pt.get("customdata")
-            location = customdata or pt.get("location") or pt.get("hovertext") or ""
+            raw = pt.get("customdata")
+            if isinstance(raw, (list, tuple)):
+                raw = raw[0] if raw else None
+            location = raw or pt.get("location") or pt.get("hovertext") or ""
             region_name = REGION_NAME_MAP.get(location, location)
             if region_name == current_selection:
                 return "", rdf.to_dict("records"), [], html.Div()
             sel = rdf[rdf["region"] == region_name]
             if len(sel):
                 idx = sel.index[0]
-                crops = togo_map.get_region_crops(agri_data, region_name, years[1])
+                crops = togo_map.get_region_crops(agri_data, region_name, map_year)
                 detail = _region_detail_card(region_name, sel, crops)
                 return region_name, sel.to_dict("records"), [int(idx)], detail
         except Exception:
@@ -719,7 +773,7 @@ def highlight_region(clickData, years, current_selection):
     if current_selection and current_selection in rdf["region"].values:
         sel = rdf[rdf["region"] == current_selection]
         idx = int(sel.index[0])
-        crops = togo_map.get_region_crops(agri_data, current_selection, years[1])
+        crops = togo_map.get_region_crops(agri_data, current_selection, map_year)
         detail = _region_detail_card(current_selection, sel, crops)
         return current_selection, sel.to_dict("records"), [idx], detail
 
@@ -757,7 +811,7 @@ def render_climate_tab(years, t):
 # ============================================================
 # TAB: PRÉVISIONS
 # ============================================================
-def render_forecast_tab(years, crops, t):
+def render_forecast_tab(years, crops, t, scenario="modéré"):
     fcst = forecasts.copy()
     if crops:
         fcst = fcst[fcst["crop"].isin(crops)]
@@ -847,7 +901,7 @@ def render_forecast_tab(years, crops, t):
                             {"label": " Optimiste (+12%)", "value": "optimiste"},
                             {"label": " Pessimiste (-15%)", "value": "pessimiste"},
                         ],
-                        value="modéré",
+                        value=scenario,
                         labelStyle={"display": "block", "margin": "8px 0",
                                     "padding": "8px 12px",
                                     "borderRadius": "8px",
@@ -865,7 +919,7 @@ def render_forecast_tab(years, crops, t):
             dbc.Card([
                 dbc.CardHeader([
                     html.I(className="fas fa-table me-1"),
-                    [html.I(className="fas fa-arrow-right me-1"), "Résumé 2025-2030"],
+                    html.Span([html.I(className="fas fa-arrow-right me-1"), " Résumé 2025-2030"]),
                 ], className="fw-bold"),
                 dbc.CardBody(dash_table.DataTable(
                     id="forecast-table",
@@ -984,21 +1038,41 @@ def render_risks_tab(years, t):
 # DOWNLOAD CALLBACKS
 # ============================================================
 @callback(Output("download-dataframe-csv", "data"),
-          Input("btn-csv", "n_clicks"), prevent_initial_call=True)
-def dl_csv(_):
-    df = agri_data.pivot_table(index="Year", columns="crop",
+          Input("btn-csv", "n_clicks"), Input("year-slider", "value"),
+          Input("crop-dropdown", "value"), Input("cat-dropdown", "value"),
+          prevent_initial_call=True)
+def dl_csv(_, years, crops, cats):
+    adf = agri_data[(agri_data["Year"] >= years[0]) & (agri_data["Year"] <= years[1])]
+    if cats:
+        adf = adf[adf["category"].isin(cats)]
+    if crops:
+        adf = adf[adf["crop"].isin(crops)]
+    df = adf.pivot_table(index="Year", columns="crop",
         values=["yield_t_ha", "production_t", "area_ha", "price_usd_t"])
     df.columns = [f"{c[0]}_{c[1]}" for c in df.columns]
     out = merged.merge(df.reset_index(), on="Year", how="left")
+    out = out[(out["Year"] >= years[0]) & (out["Year"] <= years[1])]
     return dcc.send_data_frame(out.to_csv, "agridash_togo_data.csv", index=False)
 
 @callback(Output("download-dataframe-xlsx", "data"),
-          Input("btn-excel", "n_clicks"), prevent_initial_call=True)
-def dl_xlsx(_):
+          Input("btn-excel", "n_clicks"), Input("year-slider", "value"),
+          Input("crop-dropdown", "value"), Input("cat-dropdown", "value"),
+          prevent_initial_call=True)
+def dl_xlsx(_, years, crops, cats):
+    adf = agri_data[(agri_data["Year"] >= years[0]) & (agri_data["Year"] <= years[1])]
+    if cats:
+        adf = adf[adf["category"].isin(cats)]
+    if crops:
+        adf = adf[adf["crop"].isin(crops)]
     buf = io.BytesIO()
     with pd.ExcelWriter(buf, engine="openpyxl") as w:
-        agri_data.to_excel(w, sheet_name="Crops", index=False)
-        merged.to_excel(w, sheet_name="Macro", index=False)
+        adf.to_excel(w, sheet_name="Crops", index=False)
+        merged[(merged["Year"] >= years[0]) & (merged["Year"] <= years[1])].to_excel(w, sheet_name="Macro", index=False)
+        meta = pd.DataFrame({"filtres": ["Période", "Cultures", "Catégories"],
+                             "valeurs": [f"{years[0]}-{years[1]}",
+                                         ", ".join(crops) if crops else "Toutes",
+                                         ", ".join(cats) if cats else "Toutes"]})
+        meta.to_excel(w, sheet_name="Filtres", index=False)
     buf.seek(0)
     return dcc.send_bytes(buf.read(), "agridash_togo_data.xlsx")
 
@@ -1082,13 +1156,14 @@ def _prod(years, crops, theme):
 @callback(Output("dash-cat-pie", "figure"), Input("year-slider", "value"), Input("theme-store", "data"))
 def _cat_pie(years, theme):
     t = THEMES[theme]
-    df = agri_data[(agri_data["Year"] == years[1])]
+    pie_year = min(years[1], int(agri_data["Year"].max()))
+    df = agri_data[(agri_data["Year"] == pie_year)]
     cat_totals = df.groupby("category")["production_t"].sum().reset_index()
     fig = go.Figure(data=[go.Pie(labels=cat_totals["category"], values=cat_totals["production_t"],
         hole=0.4, marker=dict(colors=[COLORS.get(c, "#999") for c in cat_totals["category"]]),
         textinfo="label+percent", textposition="outside")])
     fig.update_layout(**base_layout(t), height=280, showlegend=False,
-        title={"text": f"Répartition {years[1]}", "font": {"size": 12}})
+        title={"text": f"Répartition {pie_year}", "font": {"size": 12}})
     return fig
 
 @callback(Output("dash-prod-bar", "figure"), Input("year-slider", "value"), Input("theme-store", "data"))
@@ -1113,6 +1188,7 @@ def _gauge(years, theme):
     last = rdf.iloc[-1] if len(rdf) else None
     val = last["risk_score"]*100 if last is not None else 0
     lvl = last["risk_level"] if last is not None else "N/A"
+    lyr = int(last["Year"]) if last is not None else years[1]
     fig = go.Figure(go.Indicator(mode="gauge+number", value=val,
         number={"suffix": "%"}, gauge={"axis":{"range":[0,100]},
         "bar":{"color":COLORS["primary"]},
@@ -1121,27 +1197,61 @@ def _gauge(years, theme):
                  {"range":[50,75],"color":"rgba(230,108,55,0.15)"},
                  {"range":[75,100],"color":"rgba(211,52,56,0.15)"}],
         "threshold":{"line":{"color":COLORS["danger"],"width":4},"thickness":0.75,"value":75}},
-        title={"text": f"Risque: {lvl}"}))
+        title={"text": f"Risque {lyr}: {lvl}"}))
     fig.update_layout(**base_layout(t), height=200)
     return fig
 
 @callback(Output("dash-indicator", "figure"), Input("year-slider", "value"),
-          Input("indicator-dropdown", "value"), Input("theme-store", "data"))
-def _indicator(years, ind, theme):
+          Input("indicator-dropdown", "value"), Input("crop-dropdown", "value"),
+          Input("theme-store", "data"))
+def _indicator(years, ind, crops, theme):
     t = THEMES[theme]
-    df = merged[(merged["Year"] >= years[0]) & (merged["Year"] <= years[1])]
-    labels = {"inflation": "Inflation (%)", "gdp": "PIB ($)",
-              "precip_mm": "Précipitations (mm)", "temp_c": "Température (°C)"}
-    if ind in labels:
-        y = df[ind] if ind != "gdp" else df["gdp"] / 1e9
-        label = labels[ind]
+    y_min, y_max = years
+    macro_labels = {"inflation": "Inflation (%)", "gdp": "PIB ($)",
+                    "precip_mm": "Précipitations (mm)", "temp_c": "Température (°C)",
+                    "fert_kg_ha": "Engrais (kg/ha)", "exchange_rate": "Taux de Change (XAF/$)",
+                    "gdp_deflator": "Déflateur PIB (%)", "food_index": "Indice Prod. Alimentaire"}
+    crop_labels = {"yield_t_ha": "Rendement (t/ha)", "production_t": "Production (milliers t)",
+                   "area_ha": "Superficie (milliers ha)", "price_usd_t": "Prix ($/t)"}
+
+    if ind in macro_labels:
+        df = merged[(merged["Year"] >= y_min) & (merged["Year"] <= y_max)]
+        label = "PIB (milliards $)" if ind == "gdp" else macro_labels[ind]
+        y = df["gdp"] / 1e9 if ind == "gdp" else df[ind]
         fig = go.Figure()
-        fig.add_trace(go.Scatter(x=df["Year"], y=y, mode="lines+markers",
-            line=dict(width=3, color=COLORS["primary"]),
-            fill="tozeroy", fillcolor="rgba(17,141,255,0.12)"))
+        if len(df):
+            fig.add_trace(go.Scatter(x=df["Year"], y=y, mode="lines+markers",
+                line=dict(width=3, color=COLORS["primary"]),
+                fill="tozeroy", fillcolor="rgba(17,141,255,0.12)"))
         fig.update_layout(**base_layout(t), showlegend=False)
-        fig.update_yaxes(title=label); return fig
-    return go.Figure()
+        fig.update_yaxes(title=label)
+        return fig
+
+    if ind in crop_labels:
+        df = agri_data[(agri_data["Year"] >= y_min) & (agri_data["Year"] <= y_max)]
+        if crops:
+            df = df[df["crop"].isin(crops)]
+        fig = go.Figure(layout=base_layout(t))
+        if len(df):
+            if ind == "production_t":
+                g = df.groupby("Year")[ind].sum().reset_index()
+                y = g[ind] / 1000
+            else:
+                g = df.groupby("Year")[ind].mean().reset_index()
+                y = g[ind]
+                if ind == "area_ha":
+                    y = y / 1000
+            fig.add_trace(go.Scatter(x=g["Year"], y=y, mode="lines+markers",
+                line=dict(width=3, color=COLORS["primary"]),
+                fill="tozeroy", fillcolor="rgba(17,141,255,0.12)"))
+        fig.update_layout(**base_layout(t), showlegend=False)
+        fig.update_yaxes(title=crop_labels[ind])
+        return fig
+
+    fig = go.Figure(layout=base_layout(t))
+    fig.update_layout(**base_layout(t), showlegend=False,
+        title={"text": "Sélectionnez un indicateur", "font": {"size": 12}})
+    return fig
 
 
 # ============================================================
@@ -1244,6 +1354,8 @@ def _macro_dist(years, theme):
 def _macro_stats(years, theme):
     df = merged[(merged["Year"] >= years[0]) & (merged["Year"] <= years[1])]
     tc = THEMES[theme]["text"]
+    g = df["gdp"].pct_change().dropna()
+    croissance = f"{g.mean()*100:.2f}%" if len(g) else "—"
     return [dbc.Row([dbc.Col(l, width=7, style={"color": tc}),
                      dbc.Col(v, width=5, className="fw-bold", style={"color": tc})],
                     className="border-bottom py-1")
@@ -1252,7 +1364,7 @@ def _macro_stats(years, theme):
         ("Max Inflation", f"{df['inflation'].max():.2f}%"),
         ("Min Inflation", f"{df['inflation'].min():.2f}%"),
         ("PIB Moyen", f"{df['gdp'].mean()/1e9:.2f} Mrd $"),
-        ("Croissance PIB Moy.", f"{df['gdp'].pct_change().mean()*100:.2f}%"),
+        ("Croissance PIB Moy.", croissance),
         ("Volatilité Inflation", f"{df['inflation'].std():.2f}"),
     ]]
 
@@ -1265,7 +1377,14 @@ def _macro_agri_table(years, theme):
     label_map = {"crop_production_index": "Indice Prod. Agricole",
                  "cereal_yield_kg_ha": "Rend. Céréales (kg/ha)",
                  "agri_value_added_pct": "Valeur Ajoutée Agricole (% PIB)",
-                 "agri_land_pct": "Terres Agricoles (% total)"}
+                 "agri_land_pct": "Terres Agricoles (% total)",
+                 "AG.PRD.CREL.MT": "Indice Prod. Céréales",
+                 "AG.PRD.FOOD.XD": "Indice Prod. Alimentaire",
+                 "AG.PRD.RICE.MT": "Production Riz (tonnes)",
+                 "AG.LND.ARBL.ZS": "Terres Arables (% terres)",
+                 "AG.CON.FERT.ZS": "Utilisation Engrais (kg/ha)",
+                 "NY.GDP.DEFL.KD.ZG": "Déflateur PIB (%)",
+                 "PA.NUS.FCRF": "Taux de Change (LCU/USD)"}
     rows = [{"Indicateur": label_map.get(r["indicator"], r["indicator"]),
              "Valeur": round(r["value"], 2), "Année": int(r["Year"])}
             for _, r in latest.iterrows()]
@@ -1280,7 +1399,8 @@ def _macro_agri_table(years, theme):
           Input("crop-dropdown", "value"), Input("selected-region", "data"))
 def _map(years, theme, crops, selected_region):
     t = THEMES.get(theme, THEMES["light"])
-    rdf = togo_map.get_region_production_data(agri_data, years[1])
+    map_year = min(years[1], int(agri_data["Year"].max()))
+    rdf = togo_map.get_region_production_data(agri_data, map_year)
     geojson = TOGO_GEOJSON
 
     region_lookup = {raw: name for raw, name in REGION_NAME_MAP.items()}
@@ -1627,7 +1747,7 @@ def _forecast_filter(forecasts_df, scenario, crops):
 
 
 @callback(Output("forecast-yield", "figure"), Input("year-slider", "value"),
-          Input("crop-dropdown", "value"), Input("scenario-select", "value"),
+          Input("crop-dropdown", "value"), Input("store-scenario", "data"),
           Input("theme-store", "data"))
 def _forecast_yield(years, crops, scenario, theme):
     t = THEMES[theme]
@@ -1667,7 +1787,7 @@ def _forecast_yield(years, crops, scenario, theme):
 
 
 @callback(Output("forecast-prod", "figure"), Input("year-slider", "value"),
-          Input("crop-dropdown", "value"), Input("scenario-select", "value"),
+          Input("crop-dropdown", "value"), Input("store-scenario", "data"),
           Input("theme-store", "data"))
 def _forecast_prod(years, crops, scenario, theme):
     t = THEMES[theme]
@@ -1758,7 +1878,7 @@ def _forecast_table(years, crops, theme):
 
 
 @callback(Output("forecast-risk-gauge", "figure"), Input("year-slider", "value"),
-          Input("crop-dropdown", "value"), Input("scenario-select", "value"),
+          Input("crop-dropdown", "value"), Input("store-scenario", "data"),
           Input("theme-store", "data"))
 def _forecast_risk_gauge(years, crops, scenario, theme):
     t = THEMES[theme]
@@ -1804,25 +1924,70 @@ def _forecast_risk_gauge(years, crops, scenario, theme):
 # PDF EXPORT
 # ============================================================
 @callback(Output("download-pdf", "data"), Input("btn-pdf", "n_clicks"),
+          Input("year-slider", "value"), Input("crop-dropdown", "value"),
+          Input("cat-dropdown", "value"), Input("theme-store", "data"),
           prevent_initial_call=True)
-def _export_pdf(_):
-    from weasyprint import HTML
+def _export_pdf(_, years, crops, cats, theme):
+    try:
+        from weasyprint import HTML
+    except ImportError:
+        df = agri_data[(agri_data["Year"] >= years[0]) & (agri_data["Year"] <= years[1])]
+        return dcc.send_data_frame(df.to_csv, "agridash_togo_data.csv", index=False)
+
+    agri_max = int(agri_data["Year"].max())
+    y_last = min(years[1], agri_max)
+    adf = agri_data[(agri_data["Year"] >= years[0]) & (agri_data["Year"] <= y_last)].copy()
+    if cats:
+        adf = adf[adf["category"].isin(cats)]
+    if crops:
+        adf = adf[adf["crop"].isin(crops)]
+    if adf.empty:
+        adf = agri_data[agri_data["Year"] == agri_max]
+
+    adf_last = adf[adf["Year"] == y_last]
+    prod_total = adf_last["production_t"].sum()
+    food_total = adf_last[adf_last["staple"] == True]["production_t"].sum()
+    exp = adf_last[adf_last["crop"].isin(EXPORT_CROPS) & adf_last["price_usd_t"].notna()]
+    export_val = (exp["production_t"] * exp["price_usd_t"]).sum() / 1e6 if len(exp) else 0
+
+    rdf = risk_df[(risk_df["Year"] >= years[0]) & (risk_df["Year"] <= years[1])]
+    if len(rdf):
+        lr = rdf.iloc[-1]
+        risk_txt = f"{lr['risk_level']} ({lr['risk_score']*100:.0f}%) en {int(lr['Year'])}"
+    else:
+        risk_txt = "N/D"
+
+    prod_rows = ""
+    for c, v in adf_last.groupby("crop")["production_t"].sum().sort_values(ascending=False).items():
+        cat = ALL_CROPS.get(c, {}).get("category", "")
+        prod_rows += f"<tr><td>{c}</td><td>{cat}</td><td>{v:,.0f}</td></tr>"
+
     fs = forecast_summary.copy()
+    if crops and len(fs):
+        fs = fs[fs["crop"].isin(crops)]
     fs_rows = ""
     if len(fs):
         fs_rows = "<tr><th>Culture</th><th>Rdt 2025</th><th>Rdt 2030</th><th>Var.</th></tr>"
         for _, r in fs.iterrows():
             fs_rows += f"<tr><td>{r['crop']}</td><td>{r['yield_2025']:.2f}</td><td>{r['yield_2030']:.2f}</td><td>{r['yield_change_pct']:+.1f}%</td></tr>"
-    last_year = int(agri_data["Year"].max())
-    prod_by_crop = agri_data[agri_data["Year"]==last_year].groupby("crop")["production_t"].sum().sort_values(ascending=False)
-    html_parts = ["<h1>AgriDash Togo - Rapport</h1>",
-                  f"<p>Généré le {pd.Timestamp.now().strftime('%d/%m/%Y %H:%M')}</p>",
-                  f"<hr><h2>Production Totale ({last_year})</h2><table border='1'><tr><th>Culture</th><th>Tonnes</th></tr>"]
-    for c, v in prod_by_crop.items():
-        html_parts.append(f"<tr><td>{c}</td><td>{v:,.0f}</td></tr>")
-    html_parts.append("</table><hr><h2>Prévisions 2025-2030</h2><table border='1'>")
-    html_parts.append(fs_rows)
-    html_parts.append("</table><hr><h2>Indicateurs Macro</h2>")
+    else:
+        fs_rows = "<tr><td colspan='4'>Aucune prévision pour la sélection.</td></tr>"
+
+    html_parts = [
+        "<h1>AgriDash Togo - Rapport</h1>",
+        f"<p>Généré le {pd.Timestamp.now().strftime('%d/%m/%Y %H:%M')}</p>",
+        f"<p>Période analysée: {years[0]} - {years[1]} · Cultures: {', '.join(crops) if crops else 'Toutes'} · "
+        f"Catégories: {', '.join(cats) if cats else 'Toutes'}</p>",
+        "<hr><h2>Synthèse</h2>",
+        f"<p><b>Production Totale {y_last}:</b> {prod_total/1e6:.2f} M t</p>",
+        f"<p><b>Alimentation de base:</b> {food_total/1e6:.2f} M t</p>",
+        f"<p><b>Valeur Exportation {y_last}:</b> {export_val:.0f} M$</p>",
+        f"<p><b>Niveau de Risque:</b> {risk_txt}</p>",
+        f"<hr><h2>Production par Culture ({y_last})</h2><table border='1'>"
+        "<tr><th>Culture</th><th>Catégorie</th><th>Tonnes</th></tr>" + prod_rows + "</table>",
+        "<hr><h2>Prévisions Rendements 2025-2030</h2><table border='1'>" + fs_rows + "</table>",
+        "<hr><h2>Indicateurs Macro</h2>",
+    ]
     last_inf = inflation[inflation["Year"]==inflation["Year"].max()]["Value"].values
     last_gdp = gdp[gdp["Year"]==gdp["Year"].max()]["Value"].values
     if len(last_inf): html_parts.append(f"<p>Inflation {int(inflation['Year'].max())}: {last_inf[0]:.1f}%</p>")
@@ -1837,12 +2002,19 @@ def _export_pdf(_):
 # ============================================================
 server = app.server
 import os as _os
-_AUTH_USER = _os.environ.get("DASH_USER", "admin")
-_AUTH_PASS = _os.environ.get("DASH_PASSWORD", "togo2024")
+_AUTH_USER = _os.environ.get("DASH_USER", "")
+_AUTH_PASS = _os.environ.get("DASH_PASSWORD", "")
+_AUTH_DISABLED = _os.environ.get("DISABLE_AUTH", "").lower() in ("1", "true", "yes")
+# Auth active uniquement si user + password configurés et non désactivée explicitement.
+# Local / Render : définir DASH_USER + DASH_PASSWORD pour protéger l'app.
+# HF Spaces public : laisser vide ou DISABLE_AUTH=1 pour accès libre.
+_AUTH_ENABLED = bool(_AUTH_USER and _AUTH_PASS) and not _AUTH_DISABLED
 from flask import request as _flask_request, Response as _FlaskResponse
 
 @server.before_request
 def _check_auth():
+    if not _AUTH_ENABLED:
+        return
     if _flask_request.path.startswith("/_alive") or _flask_request.path == "/favicon.ico":
         return
     auth = _flask_request.authorization
@@ -1862,4 +2034,6 @@ def _health():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=8050)
+    _debug = _os.environ.get("DASH_DEBUG", "").lower() in ("1", "true", "yes")
+    app.run(debug=_debug, host="0.0.0.0", port=8050,
+            dev_tools_ui=_debug, dev_tools_props_check=_debug)
